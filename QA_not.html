@@ -29,7 +29,7 @@
                 <li><img src="./images/rec.png" alt="QA">問答管理</li>
                 <ul class="list2">
                     <li><a href="./QA_not.html"><img src="./images/arrow-down.png" alt="create">未回覆</a></li>
-                    <li><a href="./QA_finish.html"><img src="./images/arrow-down.png" alt="mange">已回復</a></li>
+                    <li><a href="./QA_finish.html"><img src="./images/arrow-down.png" alt="mange">已回覆</a></li>
                 </ul>
             </ul>
         </div>
@@ -120,21 +120,18 @@
             </div>
         </div>
         <script>
-            // 获取按钮
             var button_reply = document.querySelectorAll('.button_reply');
-
-            // 获取弹窗和关闭按钮
             var modal = document.getElementById("myModal");
             var closeBtn = document.getElementsByClassName("close")[0];
 
-            // 点击编辑按钮时显示弹窗
+            // 打開彈跳視窗
             button_reply.forEach(function(button) {
                 button.addEventListener('click', function() {
                     modal.style.display = "block";
                 });
             });
 
-            // 点击关闭按钮或者窗口外部区域时关闭弹窗
+            // 關閉彈跳視窗
             closeBtn.addEventListener('click', function() {
                 modal.style.display = "none";
             });
@@ -148,6 +145,6 @@
     <div class="icon">
         <a href="#top"><img src="./images/top.png" style="width: 45px; height: 45px;"></a>
     </div>
-    
+    <script src="./js/QA_reply.js"></script>
 </body>
 </html>
