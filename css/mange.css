@@ -1,0 +1,97 @@
+@import './common.css';
+/* #region  content_right*/
+.content_right{
+    width: 85%;
+    padding: 35px;
+    padding-bottom: 120px;
+    background-color: #DDDBD1;
+}
+
+.content_right_title{
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    padding-left: 35px;
+    font-size: 20px;
+    color: #603636;
+}
+.content_right_title img{
+    padding-right: 10px;
+}
+/* #endregion  */
+.content_right_table{
+    display: flex;
+    justify-content: center;
+    margin: 0px 30px;
+    padding: 40px;
+    border-radius: 10px;
+    background-color: #F4F3ED;
+    box-shadow: 2px 2px 8px #535760;
+}
+
+/* #region  表格*/
+table{
+    border-collapse: collapse;
+    width: 100%;
+    margin: 5px 10px;
+}
+
+table, th, td{
+    border: 1px solid #594949;
+}
+
+th {
+    padding: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #71472F;
+    background-color: #F7ECB5;
+}
+
+td{
+    padding: 10px 5px;
+    width: 100px;
+    text-align: center;
+    font-size: 16px;
+    color: #71472F;
+    background-color: #F6F4E7;
+}
+td a{
+    color: #71472F;
+}
+td a:hover{
+    font-weight: bold;
+    color: #c43f3f;
+}
+#out_of{
+    color: #B63232;
+}
+/* #endregion */
+
+/* #region  表格上下架*/
+#button_down{
+    width: 50px;
+    margin-right: 5px;
+    border: 0.5px solid #594949;;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #594949;
+    background-color: #FEFCF2;
+}
+#button_down:hover{
+    font-weight: bold;
+    color: rgb(186, 0, 0);
+    background-color: #f4cea4;
+}
+#button_none{
+    width: 50px;
+    margin-right: 5px;
+    border: 0.5px solid #594949;;
+    border-radius: 5px;
+    font-size: 16px;
+    opacity: 0.5;
+    color: #594949;
+    background-color: #FEFCF2;
+}
+/* #endregion */

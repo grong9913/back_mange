@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/Create.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <title>新增商品</title>
+</head>
+<body id="top">
+    <header>
+        <a href=""><img src="./images/logo.png"></a>
+    </header>
+    <div class="content">
+        <div class="sidebar">
+            <ul class="list">
+                <li><img src="./images/rec.png" alt="item">商品管理</li>
+                <ul class="list2">
+                    <li><a href="./BackStage_Create.html"><img src="./images/arrow-down.png" alt="create">新增商品</a></li>
+                    <li><a href="./BackStage_Mange.html"><img src="./images/arrow-down.png" alt="mange">商品管理</a></li>
+                    <li><a href="./BackStage_Stock.html"><img src="./images/arrow-down.png" alt="stcok">商品庫存</a></li>
+                </ul>
+                <li><img src="./images/rec.png" alt="order">訂單管理</li>
+                <ul class="list2">
+                    <li><a href="./Order_not.html"><img src="./images/arrow-down.png" alt="create">未出貨</a></li>
+                    <li><a href="./Order_go.html"><img src="./images/arrow-down.png" alt="mange">已出貨</a></li>
+                    <li><a href="./Order_finish.html"><img src="./images/arrow-down.png" alt="stcok">已完成</a></li>
+                </ul>
+                <li><img src="./images/rec.png" alt="QA">問答管理</li>
+                <ul class="list2">
+                    <li><a href="./QA_not.html"><img src="./images/arrow-down.png" alt="create">未回覆</a></li>
+                    <li><a href="./QA_finish.html"><img src="./images/arrow-down.png" alt="mange">已回復</a></li>
+                </ul>
+            </ul>
+        </div>
+        <div class="content_right">
+            <div class="content_right_title">
+                <img src="./images/magic-wand.png" width="30px" height="30px"><b>新增商品</b>
+            </div>
+            <div class="content_right_table">
+                <form>
+                    <div class="create">
+                        <div id ="field1"><p>商品品牌：</p>
+                        </div>
+                        <select id="field2">
+                            <option value="option0" disabled selected>請選擇</option>
+                            <option value="option1">Apple</option>
+                            <option value="option2">SAMSUNG</option>
+                            <option value="option3">ASUS</option>
+                            <option value="option1">OPPO</option>
+                            <option value="option2">SONY</option>
+                            <option value="option3">vivo</option>
+                        </select>
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>商品名稱：</p>
+                        </div>
+                        <input type="text" required id ="field2">
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>商品顏色：</p>
+                        </div>
+                        <input type="text" required id ="field2">
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>儲存空間：</p>
+                        </div>
+                        <select id="field2">
+                            <option value="option0" disabled selected>請選擇</option>
+                            <option value="option1">128GB²</option>
+                            <option value="option2">256GB²</option>
+                            <option value="option3">512GB²</option>
+                            <option value="option4">1TB²</option>
+                        </select>
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>庫存數量：</p>
+                        </div>
+                        <div>
+                            <div class="numbox">
+                                <button class="min" type="button" onclick="opera('val', false);"> - </button>
+                                <input class="num" type="number" id="val" value="1"/>
+                                <button class="plus" type="button" onclick="opera('val', true);"> + </button>
+                            </div>
+                    
+                                <script type="text/javascript">
+                                    function opera(x, y) {
+                                        var rs = new Number(document.getElementById(x).value);
+                                        
+                                        if (y) {
+                                            document.getElementById(x).value = rs + 1;
+                                        } else if( rs >1) {
+                                            document.getElementById(x).value = rs - 1;
+                                        }
+                                        
+                                    }
+                                </script>
+                        </div> 
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>商品單價：</p>
+                        </div>
+                        <input type="text" placeholder="NT$xxx,xxx" required id ="price-field">
+                        <script>
+                            // 獲取輸入框元素
+                            var inputField = document.getElementById('price-field');
+                            
+                            // 在輸入時處理值
+                            inputField.addEventListener('input', function(event) {
+                                // 移除所有非數字字符
+                                var value = this.value.replace(/\D/g, "");
+                                // 將數字轉換成千分位格式
+                                var formattedValue = Number(value).toLocaleString();
+                                // 將處理後的值設置回輸入框
+                                this.value = formattedValue;
+                            });
+                        </script>
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>商品介紹：</p>
+                        </div>
+                        <textarea name="mytext" rows="5" cols="40" required id ="field4"></textarea>
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>商品圖片：</p>
+                        </div>
+                        <input type="file" required id ="field3" multiple>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="reset" value="重設" id="button1"></input>
+                    <input type="submit" value="上架" id="button2">
+                </div>
+            </form>
+            
+            
+        </div>
+    </div>
+    <div class="icon">
+        <a href="#top"><img src="./images/top.png" style="width: 45px; height: 45px;"></a>
+    </div>
+</body>
+</html>

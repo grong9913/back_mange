@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/Order_go_finish.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <title>訂單管理</title>
+</head>
+<body id="top">
+    <header>
+        <a href=""><img src="./images/logo.png"></a>
+    </header>
+    <div class="content">
+        <div class="sidebar">
+            <ul class="list">
+                <li><img src="./images/rec.png" alt="item">商品管理</li>
+                <ul class="list2">
+                    <li><a href="./BackStage_Create.html"><img src="./images/arrow-down.png" alt="create">新增商品</a></li>
+                    <li><a href="./BackStage_Mange.html"><img src="./images/arrow-down.png" alt="mange">商品管理</a></li>
+                    <li><a href="./BackStage_Stock.html"><img src="./images/arrow-down.png" alt="stcok">商品庫存</a></li>
+                </ul>
+                <li><img src="./images/rec.png" alt="order">訂單管理</li>
+                <ul class="list2">
+                    <li><a href="./Order_not.html"><img src="./images/arrow-down.png" alt="create">未出貨</a></li>
+                    <li><a href="./Order_go.html"><img src="./images/arrow-down.png" alt="mange">已出貨</a></li>
+                    <li><a href="./Order_finish.html"><img src="./images/arrow-down.png" alt="stcok">已完成</a></li>
+                </ul>
+                <li><img src="./images/rec.png" alt="QA">問答管理</li>
+                <ul class="list2">
+                    <li><a href="./QA_not.html"><img src="./images/arrow-down.png" alt="create">未回覆</a></li>
+                    <li><a href="./QA_finish.html"><img src="./images/arrow-down.png" alt="mange">已回復</a></li>
+                </ul>
+            </ul>
+        </div>
+        <div class="content_right">
+            <div class="content_right_title">
+                <div class="content_right_title_img">
+                    <img src="./images/checkout.png" width="30px" height="30px" style="margin-right: 10px;"><b>訂單管理</b>
+                </div>
+                <div class="search-container">
+                    <input type="text" placeholder="請輸入關鍵字" id="search_text">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            
+            <div class="content_right_table">
+                <div class="content_right_btn">
+                    <div class="order_div">
+                        <a href="./Order_not.html" class="order_btn_2">未出貨(20)</a>
+                        <p class="order_btn_1">已出貨(20)</p>
+                        <a href="./Order_finish.html" class="order_btn_2">已完成(20)</a>
+                    </div>
+                    <div class="line">
+                    </div>
+                </div>
+                <table>
+                    <tr>
+                        <th>編號</th>
+                      <th>新增日期</th>
+                      <th>會員帳號</th>
+                      <th>商品名稱</th>
+                      <th>商品規格</th>
+                      <th>單價</th>
+                      <th>數量</th>
+                      <th>總價</th>
+                      <th>地址</th>
+                      <th>狀態</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">1</td>
+                      <td rowspan="2">2024/03/19</td>
+                      <td rowspan="2">ABC12345</td>
+                      <td>iPhone 15</td>
+                      <td>1TB-灰色</td>
+                      <td>40,000</td>
+                      <td>1</td>
+                      <td rowspan="2">110,000</td>
+                      <td rowspan="2">台中市北區三民路三段129號</td>
+                      <td rowspan="2">運送中</td>
+                    </tr>
+                    <tr>
+                        <td>iPhone 15</td>
+                        <td>256GB-白色</td>
+                        <td>35,000</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2024/03/19</td>
+                        <td>ABC12345</td>
+                        <td>iPhone 15</td>
+                        <td>1TB-灰色</td>
+                        <td>40,000</td>
+                        <td>1</td>
+                        <td>40,000</td>
+                        <td>台中市北區三民路三段129號</td>
+                        <td rowspan="2">運送中</td>
+                      </tr>  
+                </table>
+            </div>
+        </div>
+    <div class="icon">
+        <a href="#top"><img src="./images/top.png" style="width: 45px; height: 45px;"></a>
+    </div>
+</body>
+</html>

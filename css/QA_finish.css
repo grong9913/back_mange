@@ -1,0 +1,149 @@
+@import './common.css';
+/* #region  content_right*/
+.content_right{
+    width: 85%;
+    padding: 35px;
+    background-color: #DDDBD1;
+}
+
+.content_right_title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    padding-left: 35px;
+    font-size: 20px;
+    color: #603636;
+}
+.content_right_title_img{
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+}
+/* #endregion  */
+/* #region 搜尋 */
+.search-container {
+    display: flex;
+    margin-right: 20px;
+  }
+  
+#search_text{
+    margin-right: 10px;
+    padding-left: 10px; 
+    padding-right: 30px; 
+    width: 200px; 
+    border: 1px solid #7C6C6C; 
+    border-radius: 5px; 
+}
+  
+.search-container button {
+    padding: 6px 10px;
+    background: #ccc;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; 
+}
+/* #endregion */
+.content_right_btn{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 0px;
+    padding: 15px 0px 10px 0;
+    width: 100%;
+}
+/* #region 未/已回復 */
+.question_div{
+    display: flex;
+    margin: 0 40px;
+}
+.question_btn_1{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-right: 10px;
+    padding-top: 10px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px 5px 0 0;
+    text-decoration: none;
+    font-weight: bold;
+    color: #443232;
+    background-color: #E6DFBB;
+}
+.question_btn_2{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-right: 10px;
+    padding-top: 10px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px 5px 0 0;
+    text-decoration: none;
+    font-weight: bold;
+    color: #443232;
+    background-color: #D9D9D9;
+    opacity: 0.9;
+}
+.question_btn_2:hover{
+    color: #9f4e4e;
+    background-color: #e5e5e5;
+}
+/* #endregion */
+.line{
+    width: 100%;
+    height: 6px;
+    padding: 0;
+    margin: 0;
+    background-color: #EBE8DB;
+}
+.content_right_table{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0px 30px;
+    padding: 40px 0px;
+    border-radius: 10px;
+    background-color: #F4F3ED;
+    box-shadow: 2px 2px 8px #535760;
+}
+/* #region 表格 */
+table{
+    border-collapse: collapse;
+    width: 100%;
+    margin: 5px 20px;
+
+}
+
+table, th, td{
+    border: 1px solid #594949;
+}
+
+th {
+    padding: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #71472F;
+    background-color: #F7ECB5;
+}
+
+td{
+    padding: 5px;
+    height: 35px;
+    text-align: center;
+    font-size: 16px;
+    color: #71472F;
+    background-color: #F6F4E7;
+}
+table tr td:first-child,table tr td:nth-child(2){
+    width: 90px;
+}
+#question{
+    width: 300px;
+    text-align: left;
+    padding: 10px 10px;
+    padding-left: 15px;
+}
+/* #endregion */

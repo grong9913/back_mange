@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/QA_not.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <title>問答_未回覆</title>
+</head>
+<body id="top">
+    <header>
+        <a href=""><img src="./images/logo.png"></a>
+    </header>
+    <div class="content">
+        <div class="sidebar">
+            <ul class="list">
+                <li><img src="./images/rec.png" alt="item">商品管理</li>
+                <ul class="list2">
+                    <li><a href="./BackStage_Create.html"><img src="./images/arrow-down.png" alt="create">新增商品</a></li>
+                    <li><a href="./BackStage_Mange.html"><img src="./images/arrow-down.png" alt="mange">商品管理</a></li>
+                    <li><a href="./BackStage_Stock.html"><img src="./images/arrow-down.png" alt="stcok">商品庫存</a></li>
+                </ul>
+                <li><img src="./images/rec.png" alt="order">訂單管理</li>
+                <ul class="list2">
+                    <li><a href="./Order_not.html"><img src="./images/arrow-down.png" alt="create">未出貨</a></li>
+                    <li><a href="./Order_go.html"><img src="./images/arrow-down.png" alt="mange">已出貨</a></li>
+                    <li><a href="./Order_finish.html"><img src="./images/arrow-down.png" alt="stcok">已完成</a></li>
+                </ul>
+                <li><img src="./images/rec.png" alt="QA">問答管理</li>
+                <ul class="list2">
+                    <li><a href="./QA_not.html"><img src="./images/arrow-down.png" alt="create">未回覆</a></li>
+                    <li><a href="./QA_finish.html"><img src="./images/arrow-down.png" alt="mange">已回復</a></li>
+                </ul>
+            </ul>
+        </div>
+        <div class="content_right">
+            <div class="content_right_title">
+                <div class="content_right_title_img">
+                    <img src="./images/question.png" width="30px" height="30px" style="margin-right: 10px;"><b>問答管理</b>
+                </div>
+                <div class="search-container">
+                    <input type="text" placeholder="請輸入關鍵字" id="search_text">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            
+            <div class="content_right_table">
+                <div class="content_right_btn">
+                    <div class="question_div">
+                        <p class="question_btn_1">未回覆(20)</p>
+                        <a href="./QA_finish.html" class="question_btn_2">已回覆(20)</a>
+                    </div>
+                    <div class="line">
+                    </div>
+                </div>
+                <table>
+                    <tr>
+                      <th>商品名稱</th>
+                      <th>會員帳號</th>
+                      <th>提問內容</th>
+                      <th>提問時間</th>
+                      <th>操作</th>
+                    </tr>
+                    <tr>
+                      <td>iPhone 15</td>
+                      <td>ABC12345</td>
+                      <td id="question">請問到貨時間？</td>
+                      <td>2024/03/20</td>
+                      <td>
+                        <input type="button" value="回覆" class="button_reply">
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>iPhone 15</td>
+                        <td>ABC12345</td>
+                        <td id="question">請問缺貨的產品什麼時候會補貨呢？</td>
+                        <td>2024/03/20</td>
+                        <td>
+                          <input type="button" value="回覆" class="button_reply">
+                        </td>
+                      </tr>
+                    
+                </table>
+            </div> 
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form>
+                    <div class="create">
+                        <div id ="field1"><p>商品品牌：</p>
+                        </div>
+                        iPhone 15
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>會員帳號：</p>
+                        </div>
+                        ABC12345
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>提問內容：</p>
+                        </div>
+                        請問到貨時間？
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>提問時間：</p>
+                        </div>
+                        2024/03/20
+                    </div>
+                    <div class="create">
+                        <div id ="field1"><p>回覆內容：</p>
+                        </div>
+                        <textarea name="mytext" rows="5" cols="40" required id ="field4"></textarea>
+                    </div>
+                    <div class="button">
+                        <input type="reset" value="重設" id="button1"></input>
+                        <input type="submit" value="回覆" id="button2">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            // 获取按钮
+            var button_reply = document.querySelectorAll('.button_reply');
+
+            // 获取弹窗和关闭按钮
+            var modal = document.getElementById("myModal");
+            var closeBtn = document.getElementsByClassName("close")[0];
+
+            // 点击编辑按钮时显示弹窗
+            button_reply.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    modal.style.display = "block";
+                });
+            });
+
+            // 点击关闭按钮或者窗口外部区域时关闭弹窗
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = "none";
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        </script>
+    <div class="icon">
+        <a href="#top"><img src="./images/top.png" style="width: 45px; height: 45px;"></a>
+    </div>
+    
+</body>
+</html>

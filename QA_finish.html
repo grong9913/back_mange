@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/QA_finish.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <title>問答_已回覆</title>
+</head>
+<body id="top">
+    <header>
+        <a href=""><img src="./images/logo.png"></a>
+    </header>
+    <div class="content">
+        <div class="sidebar">
+            <ul class="list">
+                <li><img src="./images/rec.png" alt="item">商品管理</li>
+                <ul class="list2">
+                    <li><a href="./BackStage_Create.html"><img src="./images/arrow-down.png" alt="create">新增商品</a></li>
+                    <li><a href="./BackStage_Mange.html"><img src="./images/arrow-down.png" alt="mange">商品管理</a></li>
+                    <li><a href="./BackStage_Stock.html"><img src="./images/arrow-down.png" alt="stcok">商品庫存</a></li>
+                </ul>
+                <li><img src="./images/rec.png" alt="order">訂單管理</li>
+                <ul class="list2">
+                    <li><a href="./Order_not.html"><img src="./images/arrow-down.png" alt="create">未出貨</a></li>
+                    <li><a href="./Order_go.html"><img src="./images/arrow-down.png" alt="mange">已出貨</a></li>
+                    <li><a href="./Order_finish.html"><img src="./images/arrow-down.png" alt="stcok">已完成</a></li>
+                </ul>
+                <li><img src="./images/rec.png" alt="QA">問答管理</li>
+                <ul class="list2">
+                    <li><a href="./QA_not.html"><img src="./images/arrow-down.png" alt="create">未回覆</a></li>
+                    <li><a href="./QA_finish.html"><img src="./images/arrow-down.png" alt="mange">已回復</a></li>
+                </ul>
+            </ul>
+        </div>
+        <div class="content_right">
+            <div class="content_right_title">
+                <div class="content_right_title_img">
+                    <img src="./images/question.png" width="30px" height="30px" style="margin-right: 10px;"><b>問答管理</b>
+                </div>
+                <div class="search-container">
+                    <input type="text" placeholder="請輸入關鍵字" id="search_text">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            
+            <div class="content_right_table">
+                <div class="content_right_btn">
+                    <div class="question_div">
+                        <a href="./QA_not.html" class="question_btn_2">未回覆(20)</a>
+                        <p class="question_btn_1">已回覆(20)</p>
+                    </div>
+                    <div class="line">
+                    </div>
+                </div>
+                <table>
+                    <tr>
+                      <th>商品名稱</th>
+                      <th>會員帳號</th>
+                      <th>提問內容</th>
+                      <th>提問時間</th>
+                      <th>回覆內容</th>
+                      <th>回覆時間</th>
+                    </tr>
+                    <tr id="apply">
+                      <td>iPhone 15</td>
+                      <td>ABC12345</td>
+                      <td id="question">請問到貨時間？</td>
+                      <td>2024/03/20</td>
+                      <td id="question">您的訂單已確認，我們將於明天為您安排出貨。</td>
+                      <td>2024/03/23</td>
+                    </tr>
+                    <tr>
+                        <td>iPhone 15</td>
+                        <td>ABC12345</td>
+                        <td id="question">請問缺貨的產品什麼時候會補貨呢？</td>
+                        <td>2024/03/20</td>
+                        <td id="question">很抱歉，目前該產品暫時缺貨。貨到會通知您的，謝謝。</td>
+                        <td>2024/03/23</td>
+                    </tr>
+                    
+                </table>
+            </div>
+        </div>
+    <div class="icon">
+        <a href="#top"><img src="./images/top.png" style="width: 45px; height: 45px;"></a>
+    </div>
+    
+    
+</body>
+</html>
