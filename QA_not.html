@@ -44,7 +44,7 @@
                 </div>
             </div>
             
-            <div class="content_right_table">
+            <div class="content_right_table" >
                 <div class="content_right_btn">
                     <div class="question_div">
                         <p class="question_btn_1">未回覆(20)</p>
@@ -53,7 +53,7 @@
                     <div class="line">
                     </div>
                 </div>
-                <table>
+                <table >
                     <tr>
                       <th>商品名稱</th>
                       <th>會員帳號</th>
@@ -61,35 +61,22 @@
                       <th>提問時間</th>
                       <th>操作</th>
                     </tr>
-                    <tr>
-                      <td>iPhone 15</td>
-                      <td>ABC12345</td>
-                      <td id="question">請問到貨時間？</td>
-                      <td>2024/03/20</td>
-                      <td>
-                        <input type="button" value="回覆" class="button_reply">
-                      </td>
+                    <tr class="tbody">
+                      
                     </tr>
-                    <tr>
-                        <td>iPhone 15</td>
-                        <td>ABC12345</td>
-                        <td id="question">請問缺貨的產品什麼時候會補貨呢？</td>
-                        <td>2024/03/20</td>
-                        <td>
-                          <input type="button" value="回覆" class="button_reply">
-                        </td>
-                      </tr>
                     
                 </table>
             </div> 
         </div>
+
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <form>
                     <div class="create">
                         <div id ="field1"><p>商品品牌：</p>
-                        </div>
+                        </div >
+                        <div id="ItemName"></div>
                         iPhone 15
                     </div>
                     <div class="create">
@@ -119,6 +106,7 @@
                 </form>
             </div>
         </div>
+        
         <script>
             var button_reply = document.querySelectorAll('.button_reply');
             var modal = document.getElementById("myModal");
@@ -145,6 +133,6 @@
     <div class="icon">
         <a href="#top"><img src="./images/top.png" style="width: 45px; height: 45px;"></a>
     </div>
-    <script src="./js/QA_reply.js"></script>
+    <script src="./js/QA_Unreply.js"></script>
 </body>
 </html>

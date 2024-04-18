@@ -1,4 +1,4 @@
-fetch("http://localhost:5193/api/Back/QA/Reply",{credentials: 'include'})
+fetch("http://localhost:5193/api/Back/QA/Unreply",{credentials: 'include'})
     .then(response => {
         if (!response.ok) {
             throw new Error('伺服器回應錯誤');
@@ -17,14 +17,15 @@ fetch("http://localhost:5193/api/Back/QA/Reply",{credentials: 'include'})
                 <td>${qa.ItemName}</td>
                 <td>${qa.Account}</td>
                 <td>${qa.Content}</td>
-                <td>${qa.CreateTime ? formatDateTime(qa.CreateTime) : ''}</td>
-                <td>${qa.Reply}</td>
-                <td>${qa.ReplyTime ? formatDateTime(qa.ReplyTime) : ''}</td>                
+                <td>${qa.CreateTime ? formatDateTime(qa.CreateTime) : ''}</td> <!-- 注意這裡是 qa.CreateTime -->
+                <td>
+                    <input type="button" value="回覆" class="button_reply">
+                </td>
             `;
         });
     }
     })
-
+    
     
     .catch(error => {
         console.error('發生錯誤:', error);
