@@ -1,11 +1,9 @@
 const form = document.querySelector('form');
 
 form.addEventListener('submit', function(event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
-    
     const formData = new FormData(form);
-
 
     const data = {};
     formData.forEach((value, key) => {
@@ -13,7 +11,6 @@ form.addEventListener('submit', function(event) {
     });
 
     const url = "http://localhost:5193/api/Back/AddProduct";
-
 
     fetch(url, {
         method: 'POST',
