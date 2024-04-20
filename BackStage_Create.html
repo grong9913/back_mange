@@ -38,11 +38,11 @@
                 <img src="./images/magic-wand.png" width="30px" height="30px"><b>新增商品</b>
             </div>
             <div class="content_right_table">
-                <form>
+                <form action="/api/Back/AddProduct" class="form" id="CreateForm" method="post">
                     <div class="create">
-                        <div id ="field1"><p>商品品牌：</p>
+                        <div id ="field1" ><p>商品品牌：</p>
                         </div>
-                        <select id="field2">
+                        <select id="field2" name="Brand">
                             <option value="option0" disabled selected>請選擇</option>
                             <option value="option1">Apple</option>
                             <option value="option2">SAMSUNG</option>
@@ -52,20 +52,20 @@
                             <option value="option3">vivo</option>
                         </select>
                     </div>
-                    <div class="create">
+                    <div class="create ">
                         <div id ="field1"><p>商品名稱：</p>
                         </div>
-                        <input type="text" required id ="field2">
+                        <input type="text" required id ="field2" name="ItemName">
                     </div>
-                    <div class="create">
+                    <div class="create ">
                         <div id ="field1"><p>商品顏色：</p>
                         </div>
-                        <input type="text" required id ="field2">
+                        <input type="text" required id ="field2" name="Color">
                     </div>
                     <div class="create">
                         <div id ="field1"><p>儲存空間：</p>
                         </div>
-                        <select id="field2">
+                        <select id="field2" name="Space">
                             <option value="option0" disabled selected>請選擇</option>
                             <option value="option1">128GB²</option>
                             <option value="option2">256GB²</option>
@@ -77,9 +77,9 @@
                         <div id ="field1"><p>庫存數量：</p>
                         </div>
                         <div>
-                            <div class="numbox">
+                            <div class="numbox ">
                                 <button class="min" type="button" onclick="opera('val', false);"> - </button>
-                                <input class="num" type="number" id="val" value="1"/>
+                                <input class="num" type="number" id="val" value="1" name="Store"/>
                                 <button class="plus" type="button" onclick="opera('val', true);"> + </button>
                             </div>
                     
@@ -100,7 +100,7 @@
                     <div class="create">
                         <div id ="field1"><p>商品單價：</p>
                         </div>
-                        <input type="text" placeholder="NT$xxx,xxx" required id ="price-field">
+                        <input type="text" placeholder="NT$xxx,xxx" required id ="price-field" name="ItemPrice">
                         <script>
                             // 獲取輸入框元素
                             var inputField = document.getElementById('price-field');
@@ -119,12 +119,12 @@
                     <div class="create">
                         <div id ="field1"><p>商品介紹：</p>
                         </div>
-                        <textarea name="mytext" rows="5" cols="40" required id ="field4"></textarea>
+                        <textarea name="mytext" rows="5" cols="40" required id ="field4" name="Instruction"></textarea>
                     </div>
                     <div class="create">
                         <div id ="field1"><p>商品圖片：</p>
                         </div>
-                        <input type="file" required id ="field3" multiple>
+                        <input type="file" required id ="field3 ItemImg" multiple name="ItemImg">
                     </div>
                 </div>
                 <div class="button">

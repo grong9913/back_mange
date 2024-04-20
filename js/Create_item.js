@@ -1,4 +1,6 @@
-const form = document.querySelector('form');
+
+
+const form = document.getElementById('CreateForm');
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -10,6 +12,7 @@ form.addEventListener('submit', function(event) {
         data[key] = value;
     });
 
+    console.log(data)
     const url = "http://localhost:5193/api/Back/AddProduct";
 
     fetch(url, {
@@ -18,7 +21,7 @@ form.addEventListener('submit', function(event) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data),
-        credentials: 'include'
+        credentials: 'include',
     })
     .then(response => {
         if (!response.ok) {
