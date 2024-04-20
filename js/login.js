@@ -24,7 +24,7 @@ form.addEventListener('submit', function(event) {
     .then(data => {
         var status = data.Status;
         if (status === 200) {
-            window.location.href = './QA_not.html';
+            window.location.href = './BackStage_Create.html';
         } else {
             console.error('登入失敗', data.Message);
             alert('登入失敗，請檢查您的帳號和密碼');
