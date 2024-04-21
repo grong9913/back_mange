@@ -57,7 +57,7 @@ fetch("http://localhost:5193/api/Back/OrderShowSent", { credentials: 'include' }
                     row.innerHTML += `<td>${item.ItemNum}</td>`;
                     row.innerHTML += `<td rowspan="${order.Items.length}">${order.TotalPrice}</td>`;
                     row.innerHTML += `<td rowspan="${order.Items.length}">${order.Address}</td>`;
-                    row.innerHTML += `<td rowspan="${rowspanCounter}">運送中</td>`;
+                    row.innerHTML += `<td rowspan="${order.Items.length}">運送中</td>`;
                     table.appendChild(row);
                 }
             });
