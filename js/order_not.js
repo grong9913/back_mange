@@ -59,7 +59,7 @@ fetch("http://localhost:5193/api/Back/OrderShowUnsend", { credentials: 'include'
                     row.innerHTML += `<td rowspan="${order.Items.length}">${order.Address}</td>`;
                     row.innerHTML += `
                         <td rowspan="${order.Items.length}">
-                            <a href=""><input type="button" value="確認訂單" id="button_go"></a>
+                            <a href=""><input type="button" value="確認訂單" id="button_go" data-OrderId="${order.OrderId}"></a>
                         </td>
                     `;
                     table.appendChild(row);
@@ -67,6 +67,39 @@ fetch("http://localhost:5193/api/Back/OrderShowUnsend", { credentials: 'include'
             });
 
             prevOrder = order;
+
+
+            const detailButtons = document.querySelectorAll('#button_go');
+
+            detailButtons.forEach(button => {
+    
+                button.addEventListener('click', function() {
+                    const OrderId = button.getAttribute("data-OrderId");  
+
+                    fetch(`http://localhost:5193/api/Back/OrderSent`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                                },
+                                credentials: 'include',
+                                body: OrderId, // 將表單資料轉換成 JSON 字串送出
+                            })                        
+                        
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('伺服器回應錯誤');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                alert('完成'); // Alert user upon success
+                            })
+                            .catch(error => {
+                                console.error('發生錯誤:', error.message);
+                            });
+
+                    })
+                })         
         });
     })
     .catch(error => {
