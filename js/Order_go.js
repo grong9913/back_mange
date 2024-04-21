@@ -1,4 +1,4 @@
-fetch("http://localhost:5193/api/Back/OrderShowUnsend", { credentials: 'include' })
+fetch("http://localhost:5193/api/Back/OrderShowSent", { credentials: 'include' })
     .then(response => {
         if (!response.ok) {
             throw new Error('伺服器回應錯誤');
@@ -57,11 +57,7 @@ fetch("http://localhost:5193/api/Back/OrderShowUnsend", { credentials: 'include'
                     row.innerHTML += `<td>${item.ItemNum}</td>`;
                     row.innerHTML += `<td rowspan="${order.Items.length}">${order.TotalPrice}</td>`;
                     row.innerHTML += `<td rowspan="${order.Items.length}">${order.Address}</td>`;
-                    row.innerHTML += `
-                        <td rowspan="${order.Items.length}">
-                            <a href=""><input type="button" value="確認訂單" id="button_go"></a>
-                        </td>
-                    `;
+                    row.innerHTML += `<td rowspan="${rowspanCounter}">運送中</td>`;
                     table.appendChild(row);
                 }
             });
