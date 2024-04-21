@@ -44,12 +44,12 @@
                         </div>
                         <select id="field2" name="Brand">
                             <option value="option0" disabled selected>請選擇</option>
-                            <option value="option1">Apple</option>
-                            <option value="option2">SAMSUNG</option>
-                            <option value="option3">ASUS</option>
-                            <option value="option1">OPPO</option>
-                            <option value="option2">SONY</option>
-                            <option value="option3">vivo</option>
+                            <option value="Apple">Apple</option>
+                            <option value="SAMSUNG">SAMSUNG</option>
+                            <option value="ASUS">ASUS</option>
+                            <option value="OPPO">OPPO</option>
+                            <option value="SONY">SONY</option>
+                            <option value="vivo">vivo</option>
                         </select>
                     </div>
                     <div class="create ">
@@ -67,10 +67,10 @@
                         </div>
                         <select id="field2" name="Space">
                             <option value="option0" disabled selected>請選擇</option>
-                            <option value="option1">128GB²</option>
-                            <option value="option2">256GB²</option>
-                            <option value="option3">512GB²</option>
-                            <option value="option4">1TB²</option>
+                            <option value="128GB">128GB</option>
+                            <option value="256GB">256GB</option>
+                            <option value="512GB">512GB</option>
+                            <option value="1TB">1TB</option>
                         </select>
                     </div>
                     <div class="create">
@@ -119,12 +119,12 @@
                     <div class="create">
                         <div id ="field1"><p>商品介紹：</p>
                         </div>
-                        <textarea name="mytext" rows="5" cols="40" required id ="field4" name="Instruction"></textarea>
+                        <textarea name="Instruction" rows="5" cols="40" required id ="field4" name="Instruction"></textarea>
                     </div>
                     <div class="create">
                         <div id ="field1"><p>商品圖片：</p>
                         </div>
-                        <input type="file" required id ="field3 ItemImg" multiple name="ItemImg">
+                        <input type="file" id ="field3 ItemImg" multiple name="ItemImg" onchange="GetFileName(event)">
                     </div>
                 </div>
                 <div class="button">

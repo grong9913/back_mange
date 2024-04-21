@@ -1,17 +1,26 @@
+let FileName = [];
 
-
+function GetFileName(event){
+    const fileList = event.target.files;
+    FileName = [];
+    for(let i = 0 ; i<fileList.length;i++){
+        FileName.push(fileList[i].name);
+    }
+}
 const form = document.getElementById('CreateForm');
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
-
+    console.log(FileName);
     const formData = new FormData(form);
-
     const data = {};
+    const ItemImg = "ItemImg";
     formData.forEach((value, key) => {
         data[key] = value;
     });
-
+    data[ItemImg] = FileName[0];
+    data["Store"] = parseInt(data["Store"]);
+    data["ItemPrice"] = parseInt(data["ItemPrice"]);
     console.log(data)
     const url = "http://localhost:5193/api/Back/AddProduct";
 

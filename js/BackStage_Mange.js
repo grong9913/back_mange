@@ -6,17 +6,86 @@ fetch("http://localhost:5193/api/Back/Items", { credentials: 'include' })
         return response.json();
     })
     .then(data => {
-        console.log("123");
-        console.log(tableBody);
-        
+        console.log(data.message)
         const tableBody = document.querySelector("table tbody");
-
-        if (data && data.length > 0) {
+        if (data.message && data.message.length > 0) {
             console.log("888");
-            data.forEach(item => {
+            data.message.forEach(item => {
                 const newRow = document.createElement('tr');
-                newRow.classList.add('tbody'); 
-                newRow.innerHTML = `
+                newRow.classList.add('tbody');
+                for(let i=0;i<5;i++){
+                    const td = document.createElement('td');
+                    switch(i){
+                        case 0:
+                            const a =document.createElement('a')
+                            a.href = "#";
+                            a.textContent = item.ItemName;
+                            td.appendChild(a);
+                            break;
+                        case 1:
+                            if(item.UPTime != null)
+                                td.textContent = item.UPTime;
+                            else
+                                td.textContent = "-";
+                            break;
+                        case 2:
+                            if(item.DownTime != null)
+                                td.textContent = item.DownTime;
+                            else
+                                td.textContent = "-";
+                            break;
+                        case 3:
+                            if(item.IsAvailable)
+                                td.textContent = "已上架";
+                            else
+                                td.textContent = "已下架";
+                            break;
+                        case 4:
+                            const input = document.createElement('input')
+                            input.type = "button";
+                            if(item.IsAvailable){
+                                input.value = "下架";
+                                input.id = "button_down"
+                            }
+                            else{
+                                input.value = "上架";
+                                input.id = "button_down"
+                            }
+                            input.addEventListener('click',function(event){
+                                event.preventDefault();
+                                console.log('123')
+                                let url;
+                                if(item.IsAvailable){
+                                    url = `http://localhost:5193/api/Back/Down?ItemId=${item.ItemId}`;
+                                }
+                                else{
+                                    url = `http://localhost:5193/api/Back/UP?ItemId=${item.ItemId}`;
+                                }
+                                fetch(url,{
+                                    method: 'POST',
+                                    credentials: 'include'
+                                })
+                                .then(response=>{
+                                    if(!response.ok){
+                                        throw new Error('錯誤')
+                                    }
+                                    return response.json();
+                                })
+                                .then(data=>{
+                                    console.log(data);
+                                    window.location.reload();
+                                })
+                                .catch(error=>{
+                                    console.error(error);
+                                })
+                            })
+                            td.appendChild(input);
+                            break;
+                    }
+                    newRow.appendChild(td);
+                }
+                tableBody.appendChild(newRow);
+                /*newRow.innerHTML = `
                 <td><a href="">${item.ItemName}</a></td>
                 <td>${item.CreateTime}</td>
                 <td>${item.DownTime}</td>
@@ -25,7 +94,7 @@ fetch("http://localhost:5193/api/Back/Items", { credentials: 'include' })
                   <input type="button" value="下架" id="button_down">
                 </td>              
                 `;
-                tableBody.appendChild(newRow);
+                tableBody.appendChild(newRow);*/
             });
         };
         
