@@ -6,23 +6,25 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
         return response.json();
     })
     .then(data => {
-        const tableRows = document.querySelectorAll(".tbody");
-
+        const table = document.querySelector('#qaTable'); // 取得表格元素
+        
         console.log(data);
 
-        // 將每個未回覆的 QA 添加到表格中
+        // 如果資料庫有未回覆的 QA 資料
         if (data.Message && data.Message.length > 0) {
-            Array.from(tableRows).forEach((row, index) => {
-                const qa = data.Message[index]; // 取得對應索引的 QA 物件
+            data.Message.forEach(qa => {
+                const row = document.createElement('tr'); // 創建新的表格行
+                row.classList.add('tbody'); // 為表格行添加類別
                 row.innerHTML = `
                     <td>${qa.ItemName}</td>
                     <td>${qa.Account}</td>
                     <td>${qa.Content}</td>
-                    <td>${qa.CreateTime ? formatDateTime(qa.CreateTime) : ''}</td> <!-- 注意這裡是 qa.CreateTime -->
+                    <td>${qa.CreateTime ? formatDateTime(qa.CreateTime) : ''}</td>
                     <td>
                         <input type="button" value="回覆" class="button_reply">
                     </td>
                 `;
+                table.appendChild(row); // 將表格行添加到表格中
             });
         }
     })
@@ -30,6 +32,8 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
         console.error('發生錯誤:', error);
     });
 
+
+    
 function formatDateTime(dateTimeString) {
     const dateTime = new Date(dateTimeString); // 解析日期時間字符串
     const year = dateTime.getFullYear();

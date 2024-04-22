@@ -6,13 +6,15 @@ fetch("http://localhost:5193/api/Back/QA/Reply",{credentials: 'include'})
         return response.json();
     })
     .then(data => {
-        const tableRows = document.querySelectorAll(".tbody");
-
+        const table = document.querySelector('#qa_ok_Table'); // 取得表格元素
+        
         console.log(data);
-        // 將每個未回覆的 QA 添加到表格中
+
+        // 如果資料庫有未回覆的 QA 資料
         if (data.Message && data.Message.length > 0) {
-            Array.from(tableRows).forEach((row, index) => {
-                const qa = data.Message[index];
+            data.Message.forEach(qa => {
+                const row = document.createElement('tr'); // 創建新的表格行
+                row.classList.add('tbody'); // 為表格行添加類別
                 row.innerHTML = `
                     <td>${qa.ItemName}</td>
                     <td>${qa.Account}</td>
@@ -21,6 +23,7 @@ fetch("http://localhost:5193/api/Back/QA/Reply",{credentials: 'include'})
                     <td>${qa.Reply}</td>
                     <td>${qa.ReplyTime ? formatDateTime(qa.ReplyTime) : ''}</td>                
                 `;
+                table.appendChild(row); // 將表格行添加到表格中
             });
         }
     })
