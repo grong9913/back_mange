@@ -33,7 +33,9 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
     });
 
 
+
     
+
 function formatDateTime(dateTimeString) {
     const dateTime = new Date(dateTimeString); // 解析日期時間字符串
     const year = dateTime.getFullYear();
@@ -46,3 +48,54 @@ function formatDateTime(dateTimeString) {
     const formattedDateTime = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
     return formattedDateTime;
 }
+
+function getItem(FormatId){
+    fetch(`http://localhost:5193/api/Back/ItemUpdate/${FormatId}`,{
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(response=>{
+        if(!response.ok){
+            throw new Error('Fail')
+        }
+        return response.json();
+    })
+    .then(data=>{
+        const form = document.querySelector('.form');
+        form.innerHTML = `<div class="create">
+        <div id ="field1"><p>商品品牌：</p>
+        </div >
+        <p>${data.Message.ItemName}</p>
+    </div>
+    <div class="create">
+        <div id ="field1"><p>會員帳號：</p>
+        </div>
+        <p>${data.Message.Account}</p>
+    </div>
+    <div class="create">
+        <div id ="field1"><p>提問內容：</p>
+        </div>
+        <p>${data.Message.Content}</p>
+    </div>
+    <div class="create">
+        <div id ="field1"><p>提問時間：</p>
+        </div>
+        <p>${data.Message.CreateTime}</p>
+    </div>
+    <div class="create">
+        <div id ="field1"><p>回覆內容：</p>
+        </div>
+        <textarea name="mytext" rows="5" cols="40" required id ="field4"></textarea>
+    </div>
+    <div class="button">
+        <input type="reset" value="重設" id="button1"></input>
+        <input type="submit" value="回覆" id="button2">
+    </div>`
+    })
+    .catch(error=>{
+        console.error(error);
+    })
+}
+
+// 獲取輸入框元素
+var inputField = document.getElementById('field1');
