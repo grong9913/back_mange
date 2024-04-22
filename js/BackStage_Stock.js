@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             const table = document.querySelector('table');
-            table.innerHTML = '';
-
+            //table.innerHTML = '';
             const headerRow = document.createElement('tr');
             headerRow.innerHTML = `
                 <th>新增日期</th>
@@ -21,8 +20,64 @@ document.addEventListener("DOMContentLoaded", function() {
                 <th>操作</th>
             `;
             table.appendChild(headerRow);
-
-            let prevOrder = null;
+            data.Message.forEach((order, index)=>{
+                let count = 0;
+                const tr = document.createElement('tr');
+                tr.className = "Item"
+                const CreateTime = document.createElement('td');
+                CreateTime.textContent = formatDateTime(order.CreateTime);
+                const ItemName = document.createElement('td');
+                ItemName.textContent = order.ItemName;
+                tr.appendChild(CreateTime);
+                tr.appendChild(ItemName);
+                table.appendChild(tr);
+                order.Format.forEach(item=>{
+                    let count2 = 0;
+                    const Space = document.createElement('td');
+                    Space.textContent = item.Space;
+                    
+                    item.info.forEach((itemInfo,index)=>{
+                        const tr2 = document.createElement('tr');
+                        tr2.className = 'ItemInfo';
+                        const Color = document.createElement('td');
+                        Color.textContent = itemInfo.Color;
+                        const Store = document.createElement('td');
+                        Store.textContent = itemInfo.Store;
+                        const ItemPrice = document.createElement('td');
+                        ItemPrice.textContent = itemInfo.ItemPrice;
+                        const inputTd = document.createElement('td');
+                        const input = document.createElement('input');
+                        input.type = "button";
+                        input.value = "修改"
+                        input.className = "button_edit"
+                        input.setAttribute('data-FormatId',itemInfo.FormatId);
+                        inputTd.appendChild(input)
+                        if(count == 0){
+                            tr.appendChild(Space);
+                            tr.appendChild(Color);
+                            tr.appendChild(Store);
+                            tr.appendChild(ItemPrice);
+                            tr.appendChild(inputTd);
+                        }else{
+                            if(count2 == 0){
+                                tr2.appendChild(Space);
+                            }
+                            tr2.appendChild(Color);
+                            tr2.appendChild(Store);
+                            tr2.appendChild(ItemPrice);
+                            tr2.appendChild(inputTd);
+                            table.appendChild(tr2)
+                        }
+                        count += 1;
+                        count2 = index + 1;
+                    })
+                    Space.rowSpan = count2;
+                })
+                CreateTime.rowSpan = count;
+                ItemName.rowSpan = count;
+            })
+            setButtonEventHandlers();
+            /*let prevOrder = null;
 
             data.Message.forEach((order, index) => {
                 let colorCount = 0; // 用於計算每個商品的顏色數量
@@ -42,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     row.innerHTML += `
                         <td><input type="button" value="修改" class="button_edit" data-FormatId="${format.info[0].FormatId}"></td>
                     `;
-                    console.log("123");
                     setButtonEventHandlers();
 
                     table.appendChild(row);
@@ -58,7 +112,6 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <td><input type="button" value="修改" class="button_edit" data-FormatId="${format.info[i].FormatId}"></td>
                             `;
                             table.appendChild(colorRow);
-                            console.log("123");
                             setButtonEventHandlers();
                         }
                     }
@@ -67,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 prevOrder = order;
 
-            });
+            });*/
 
 
         })
@@ -78,10 +131,21 @@ document.addEventListener("DOMContentLoaded", function() {
     // 函數：設置按鈕的事件處理器
     function setButtonEventHandlers() {
         const detailButtons = document.querySelectorAll('.button_edit');
+        var modal = document.getElementById("myModal");
+        var closeBtn = document.getElementsByClassName("close")[0];
         detailButtons.forEach(button => {
             button.addEventListener('click', function() {
-                const FormatId = button.getAttribute("data-FormatId");  
-
+                const FormatId = button.getAttribute("data-FormatId");
+                getItem(FormatId);
+                modal.style.display = "block";
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = "none";
+                });
+                window.addEventListener('click', function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                });
                 const form = document.getElementById('UpdateForm');
 
                 form.addEventListener('submit', function(event) {
@@ -95,7 +159,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     formData.forEach((value, key) => {
                         data[key] = value;
                     });
-                    
+                    data['ItemPrice'] = parseInt(data['ItemPrice'].replace(/,/g, ''), 10);
+                    data['Store'] = parseInt(data['Store']);
+                    data['FormatId'] = parseInt(FormatId);
                     console.log(data)
                     
                     fetch(`http://localhost:5193/api/Back/ItemUpdate`, {
@@ -115,6 +181,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     .then(data => {
                         console.log('修改成功', data);
                         alert('修改成功');
+                        location.reload();
                     })
                     .catch(error => {
                         console.error('發生錯誤:', error);
@@ -135,4 +202,87 @@ document.addEventListener("DOMContentLoaded", function() {
         const seconds = ('0' + dateTime.getSeconds()).slice(-2);
         return `${year}/${month}/${date} ${hours}:${minutes}:${seconds}`;
     }
+});
+
+function getItem(FormatId){
+    fetch(`http://localhost:5193/api/Back/ItemUpdate/${FormatId}`,{
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(response=>{
+        if(!response.ok){
+            throw new Error('Fail')
+        }
+        return response.json();
+    })
+    .then(data=>{
+        const form = document.querySelector('.form');
+        form.innerHTML = `<div class="create">
+        <div id ="field1"><p>商品品牌：</p>
+        </div>
+        <p>${data.Message.Brand}</p>
+    </div>
+    <div class="create">
+        <div id ="field1"><p>商品名稱：</p>
+        </div>
+        <p>${data.Message.ItemName}</p>
+    </div>
+    <div class="create">
+        <div id ="field1"><p>商品顏色：</p>
+        </div>
+        <p>${data.Message.Color}</p>
+    </div>
+    <div class="create">
+        <div id ="field1"><p>儲存空間：</p>
+        </div>
+        ${data.Message.Space}
+    </div>
+    <div class="create">
+        <div id ="field1"><p>庫存數量：</p>
+        </div>
+        <div>
+            <div class="numbox">
+                <button class="min" type="button" onclick="opera('val', false);"> - </button>
+                <input class="num" type="number" id="val" value="0" name="Store"/>
+                <button class="plus" type="button" onclick="opera('val', true);"> + </button>
+            </div>
+        </div> 
+    </div>
+    <div class="create">
+        <div id ="field1"><p>商品單價：</p>
+        </div>
+        <input type="text" placeholder="NT$xxx,xxx" required id ="field2" name="ItemPrice">
+    </div>
+    <div class="button">
+        <input type="reset" value="重設" id="button1"></input>
+        <input type="submit" value="修改完畢" id="button2">
+    </div>`
+    })
+    .catch(error=>{
+        console.error(error);
+    })
+}
+
+function opera(x, y) {
+    var rs = new Number(document.getElementById(x).value);
+    if (y) {
+        document.getElementById(x).value = rs + 1;
+    } else if( rs >0) {
+        document.getElementById(x).value = rs - 1;
+    }
+        
+}
+
+
+// 獲取輸入框元素
+var inputField = document.getElementById('field2');
+                            
+// 在輸入時處理值
+inputField.addEventListener('input', function(event) {
+    // 移除所有非數字字符
+    var value = this.value.replace(/\D/g, "");
+    // 將數字轉換成千分位格式
+    var formattedValue = Number(value).toLocaleString();
+    // 將處理後的值設置回輸入框
+    this.value = formattedValue;
 });

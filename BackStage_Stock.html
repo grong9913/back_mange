@@ -105,7 +105,7 @@
                           <td>
                             <input type="button" value="修改" class="button_edit">
                           </td>
-                      </tr> -->
+                      </tr>-->
                       
                 </table>
             </div>
@@ -113,21 +113,21 @@
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <formform action="/api/Back/ItemUpdate" class="form" id="UpdateForm" method="post">
+                <form action="/api/Back/ItemUpdate" class="form" id="UpdateForm" method="post">
                     <div class="create">
                         <div id ="field1"><p>商品品牌：</p>
                         </div>
-                        APPLE
+                        <p>APPLE</p>
                     </div>
                     <div class="create">
                         <div id ="field1"><p>商品名稱：</p>
                         </div>
-                        iPhone 15 Pro Max
+                        <p>iPhone 15 Pro Max</p>
                     </div>
                     <div class="create">
                         <div id ="field1"><p>商品顏色：</p>
                         </div>
-                        白色鈦金屬
+                        <p>白色鈦金屬</p>
                     </div>
                     <div class="create">
                         <div id ="field1"><p>儲存空間：</p>
@@ -140,40 +140,15 @@
                         <div>
                             <div class="numbox">
                                 <button class="min" type="button" onclick="opera('val', false);"> - </button>
-                                <input class="num" type="number" id="val" value="1" name="Store"/>
+                                <input class="num" type="number" id="val" value="0" name="Store"/>
                                 <button class="plus" type="button" onclick="opera('val', true);"> + </button>
                             </div>
-                            <script type="text/javascript">
-                                function opera(x, y) {
-                                    var rs = new Number(document.getElementById(x).value);
-                                    if (y) {
-                                        document.getElementById(x).value = rs + 1;
-                                    } else if( rs >0) {
-                                        document.getElementById(x).value = rs - 1;
-                                    }
-                                        
-                                }
-                            </script>
                         </div> 
                     </div>
                     <div class="create">
                         <div id ="field1"><p>商品單價：</p>
                         </div>
                         <input type="text" placeholder="NT$xxx,xxx" required id ="field2" name="ItemPrice">
-                        <script>
-                            // 獲取輸入框元素
-                            var inputField = document.getElementById('field2');
-                            
-                            // 在輸入時處理值
-                            inputField.addEventListener('input', function(event) {
-                                // 移除所有非數字字符
-                                var value = this.value.replace(/\D/g, "");
-                                // 將數字轉換成千分位格式
-                                var formattedValue = Number(value).toLocaleString();
-                                // 將處理後的值設置回輸入框
-                                this.value = formattedValue;
-                            });
-                        </script>
                     </div>
                     <div class="button">
                         <input type="reset" value="重設" id="button1"></input>
@@ -185,32 +160,6 @@
     <div class="icon">
         <a href="#top"><img src="./images/top.png" style="width: 45px; height: 45px;"></a>
     </div>
-    <script>
-        // 获取按钮
-        var editButtons = document.querySelectorAll('.button_edit');
-
-        // 获取弹窗和关闭按钮
-        var modal = document.getElementById("myModal");
-        var closeBtn = document.getElementsByClassName("close")[0];
-
-        // 点击编辑按钮时显示弹窗
-        editButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                modal.style.display = "block";
-            });
-        });
-
-        // 点击关闭按钮或者窗口外部区域时关闭弹窗
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = "none";
-        });
-
-        window.addEventListener('click', function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        });
-    </script>
       <script src="./js/BackStage_Stock.js"></script>
 </body>
 </html>
