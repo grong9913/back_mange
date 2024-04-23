@@ -21,7 +21,7 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
                         <td>${qa.Content}</td>
                         <td>${qa.CreateTime ? formatDateTime(qa.CreateTime) : ''}</td>
                         <td>
-                            <a href=""><input type="button" value="回覆留言" class="button_reply" data-Id="${qa.Id}"></a>
+                            <a href=""><input type="button" value="回覆" class="button_reply" data-Id="${qa.Id}"></a>
                         </td>
                     `;
 
