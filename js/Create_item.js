@@ -41,6 +41,7 @@ form.addEventListener('submit', function(event) {
     .then(data => {
         console.log('新增商品成功:', data);
         alert('新增商品成功');
+        location.reload();
     })
     .catch(error => {
         console.error('發生錯誤:', error);
