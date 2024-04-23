@@ -18,9 +18,9 @@ form.addEventListener('submit', function(event) {
     formData.forEach((value, key) => {
         data[key] = value;
     });
-    data[ItemImg] = FileName[0];
+    data[ItemImg] = FileName;
     data["Store"] = parseInt(data["Store"]);
-    data["ItemPrice"] = parseInt(data["ItemPrice"]);
+    data["ItemPrice"] = parseInt(data["ItemPrice"].replace(/,/g, ''));
     console.log(data)
     const url = "http://localhost:5193/api/Back/AddProduct";
 
@@ -41,6 +41,7 @@ form.addEventListener('submit', function(event) {
     .then(data => {
         console.log('新增商品成功:', data);
         alert('新增商品成功');
+        location.reload();
     })
     .catch(error => {
         console.error('發生錯誤:', error);
