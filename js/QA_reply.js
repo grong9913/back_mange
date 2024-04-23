@@ -55,24 +55,30 @@ fetch("http://localhost:5193/api/Back/QA/Reply",{credentials: 'include'})
             // 解析JSON響應
             const data = await response.json();
     
-            const table = document.querySelector('#qa_ok_Table');
+            var table = document.getElementById('qa_ok_Table');
+            var rows = table.querySelectorAll('.tbody');
 
-            table.innerHTML = '';
+            rows.forEach(function(row) {
+                row.parentNode.removeChild(row);
+            });
             
             // 如果有符合搜尋條件的資料，則顯示在表格中
             if (data.Message && data.Message.length > 0) {
                 data.Message.forEach(qa => {
-                    const row = document.createElement('tr'); // 創建新的表格行
-                    row.classList.add('tbody'); // 為表格行添加類別
-                    row.innerHTML = `
-                        <td>${qa.ItemName}</td>
-                        <td>${qa.Account}</td>
-                        <td>${qa.Content}</td>
-                        <td>${qa.CreateTime ? formatDateTime(qa.CreateTime) : ''}</td>
-                        <td>${qa.Reply}</td>
-                        <td>${qa.ReplyTime ? formatDateTime(qa.ReplyTime) : ''}</td>                
-                    `;
-                    table.appendChild(row); // 將表格行添加到表格中
+                    if(qa.Reply!=null){ 
+                        const row = document.createElement('tr'); // 創建新的表格行
+                        row.classList.add('tbody'); // 為表格行添加類別
+                        row.innerHTML = `
+                            <td>${qa.ItemName}</td>
+                            <td>${qa.Account}</td>
+                            <td>${qa.Content}</td>
+                            <td>${qa.CreateTime ? formatDateTime(qa.CreateTime) : ''}</td>
+                            <td>${qa.Reply}</td>
+                            <td>${qa.ReplyTime ? formatDateTime(qa.ReplyTime) : ''}</td>                
+                        `;
+                        table.appendChild(row); // 將表格行添加到表格中
+                    }
+                    
                 });
             } else {
                 // 如果沒有符合搜尋條件的資料，顯示提示信息
