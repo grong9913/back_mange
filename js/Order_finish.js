@@ -24,46 +24,51 @@ fetch("http://localhost:5193/api/Back/OrderShowFinish", { credentials: 'include'
         `;
         table.appendChild(headerRow);
 
-        let prevOrder = null;
-        let rowspanCounter = 0;
-
-        data.Message.forEach((order, index) => {
-            const row = document.createElement('tr');
-
-            if (prevOrder && prevOrder.Account === order.Account && prevOrder.TotalPrice === order.TotalPrice && prevOrder.Address === order.Address) {
-                rowspanCounter++;
-                // Increment rowspan for each item
-                row.innerHTML += '';
-            } else {
-                rowspanCounter = 1;
-                row.innerHTML += `<td rowspan="${order.Items.length}">${order.OrderId}</td>`;
-                row.innerHTML += `<td rowspan="${order.Items.length}">${formatDateTime(order.OrderTime)}</td>`;
-                row.innerHTML += `<td rowspan="${order.Items.length}">${order.Account}</td>`;
-            }
-
-            // Displaying each item in a separate row
-            order.Items.forEach((item, itemIndex) => {
-                if (itemIndex !== 0) {
-                    const itemRow = document.createElement('tr');
-                    itemRow.innerHTML += `<td>${item.ItemName}</td>`;
-                    itemRow.innerHTML += `<td>${item.ItemFormat}</td>`;
-                    itemRow.innerHTML += `<td>${item.ItemPrice}</td>`;
-                    itemRow.innerHTML += `<td>${item.ItemNum}</td>`;
-                    table.appendChild(itemRow);
-                } else {
-                    row.innerHTML += `<td>${item.ItemName}</td>`;
-                    row.innerHTML += `<td>${item.ItemFormat}</td>`;
-                    row.innerHTML += `<td>${item.ItemPrice}</td>`;
-                    row.innerHTML += `<td>${item.ItemNum}</td>`;
-                    row.innerHTML += `<td rowspan="${order.Items.length}">${order.TotalPrice}</td>`;
-                    row.innerHTML += `<td rowspan="${order.Items.length}">${order.Address}</td>`;
-                    row.innerHTML += `<td rowspan="${order.Items.length}" id="btn_ok">已完成</td>`;
-                    table.appendChild(row);
+        let rowspanCounter;
+        data.Message.forEach(item=>{
+            rowspanCounter = 0;
+            console.log(item);
+            const bodyRow = document.createElement('tr');
+            const OtherItem = document.createElement('tr');
+            bodyRow.innerHTML = '';
+            bodyRow.innerHTML += `
+            <td class="order${item.OrderId}">${item.OrderId}</td>
+            <td class="order${item.OrderId}">${item.OrderTime}</td>
+            <td class="order${item.OrderId}">${item.Account}</td>`;
+            item.Items.forEach((orderItem,index)=>{
+                rowspanCounter += 1;
+                console.log(index);
+                if(index == 0){
+                    bodyRow.innerHTML +=`
+                    <td>${orderItem.ItemName}</td>
+                    <td>${orderItem.ItemFormat}</td>
+                    <td>${orderItem.ItemPrice}</td>
+                    <td>${orderItem.ItemNum}</td>`
+                    table.appendChild(bodyRow);
                 }
-            });
-
-            prevOrder = order;
-        });
+                else{
+                    OtherItem.innerHTML = `
+                    <td>${orderItem.ItemName}</td>
+                    <td>${orderItem.ItemFormat}</td>
+                    <td>${orderItem.ItemPrice}</td>
+                    <td>${orderItem.ItemNum}</td>`;
+                }
+            })
+            bodyRow.innerHTML += `
+            <td class="order${item.OrderId}">${item.TotalPrice}</td>
+            <td class="order${item.OrderId}">${item.Address}</td>
+            <td class="order${item.OrderId}">
+                已完成
+            </td>`;
+            table.appendChild(bodyRow)
+            table.appendChild(OtherItem)
+            const forRowSpan = document.querySelectorAll(`.order${item.OrderId}`);
+            console.log(forRowSpan)
+            forRowSpan.forEach(td=>{
+                td.rowSpan  = rowspanCounter;
+            })
+            
+        })
     })
     .catch(error => {
         console.error('Error:', error);
