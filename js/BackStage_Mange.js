@@ -17,8 +17,7 @@ fetch("http://localhost:5193/api/Back/Items", { credentials: 'include' })
                     const td = document.createElement('td');
                     switch(i){
                         case 0:
-                            const a =document.createElement('a')
-                            a.href = "#";
+                            const a =document.createElement('text')
                             a.textContent = item.ItemName;
                             td.appendChild(a);
                             break;
