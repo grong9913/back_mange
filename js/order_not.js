@@ -7,7 +7,7 @@ fetch("http://localhost:5193/api/Back/OrderShowUnsend", { credentials: 'include'
     })
     .then(data => {
         const p = document.querySelector('.order_btn_1')
-        p.textContent = `未出貨(${data.Message.length})`
+        p.textContent = `未出貨`
         const table = document.querySelector('table');
         table.innerHTML = '';
 
