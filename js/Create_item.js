@@ -8,9 +8,10 @@ function GetFileName(event){
     }
 }
 const form = document.getElementById('CreateForm');
-form.addEventListener('submit', function(event) {
+form.addEventListener('submit', async function(event) {
     event.preventDefault();
     console.log(FileName);
+    console.log("123");
     const formData = new FormData(form);
     const data = {};
     const ItemImg = "ItemImg";
@@ -24,6 +25,7 @@ form.addEventListener('submit', function(event) {
     const url = "http://localhost:5193/api/Back/AddProduct";
 
     fetch(url, {
+        credentials: 'include' ,
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -59,7 +61,9 @@ form.addEventListener('submit', async function(event) {
     }
 
     try {
-        const response = await fetch('http://localhost:5193/api/Paradise/uploadimg', {
+        console.log("img uploading")
+        const response = await fetch('http://localhost:5193/api/Back/uploadtrytrysee', {
+            credentials: 'include' ,
             method: 'POST',
             body: formData
         });
