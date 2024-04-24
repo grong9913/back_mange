@@ -62,7 +62,7 @@ form.addEventListener('submit', async function(event) {
 
     try {
         console.log("img uploading")
-        const response = await fetch('http://localhost:5193/api/Back/uploadtrytrysee', {
+        const response = await fetch('http://localhost:5193/api/Back/uploadimg', {
             credentials: 'include' ,
             method: 'POST',
             body: formData
