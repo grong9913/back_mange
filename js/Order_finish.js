@@ -33,7 +33,7 @@ fetch("http://localhost:5193/api/Back/OrderShowFinish", { credentials: 'include'
             bodyRow.innerHTML = '';
             bodyRow.innerHTML += `
             <td class="order${item.OrderId}">${item.OrderId}</td>
-            <td class="order${item.OrderId}">${item.OrderTime}</td>
+            <td class="order${item.OrderId}">${formatDateTime(item.OrderTime)}</td>
             <td class="order${item.OrderId}">${item.Account}</td>`;
             item.Items.forEach((orderItem,index)=>{
                 rowspanCounter += 1;
