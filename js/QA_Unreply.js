@@ -69,19 +69,25 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
             
             // 如果有符合搜尋條件的資料，則顯示在表格中
             if (data.Message && data.Message.length > 0) {
-                data.Message.forEach(qa => {
+                console.log(data.Message,"65656565")
+                data.Message.forEach(Search => {
+                    if(Search.Reply==null){
+
                         const row = document.createElement('tr'); // 創建新的表格行
                         row.classList.add('tbody'); // 為表格行添加類別
                         row.innerHTML = `
-                            <td>${qa.ItemName}</td>
-                            <td>${qa.Account}</td>
-                            <td>${qa.Content}</td>
-                            <td>${qa.CreateTime ? formatDateTime(qa.CreateTime) : ''}</td>
+                            <td>${Search.ItemName}</td>
+                            <td>${Search.Account}</td>
+                            <td>${Search.Content}</td>
+                            <td>${Search.CreateTime ? formatDateTime(Search.CreateTime) : ''}</td>
                             <td>
-                                <a href=""><input type="button" value="回覆" class="button_reply" data-Id="${qa.Id}"></a>
+                                <a href=""><input type="button" value="回覆" class="button_reply" data-Id="${Search.Id}"></a>
                             </td>             
                         `;
+                        console.log(Search.CreateTime,"Search.CreateTime");
                         table.appendChild(row); // 將表格行添加到表格中
+
+                    }
                 });
                 setButtonEventHandlers();
             }
@@ -97,7 +103,7 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
     });
 
     function setButtonEventHandlers() {
-        console.log("123")
+        console.log("12388888")
         const detailButtons = document.querySelectorAll('.button_reply');
         var modal = document.getElementById("myModal");
         var closeBtn = document.getElementsByClassName("close")[0];
@@ -111,6 +117,7 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
 
                 //抓取彈跳視窗資料
                 const Id = button.getAttribute("data-Id");
+                console.log(Id);
                 getItem(Id);
 
                 //關閉彈跳視窗
@@ -130,8 +137,6 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
 
                 form.addEventListener('submit', function(event) {
                     event.preventDefault();
-
-                    console.log("999");
                     
                     const formData = new FormData(form);
                     
@@ -198,8 +203,6 @@ function getItem(Id){
         return response.json();
     })
     .then(data=>{
-        console.log(data);
-        console.log("123");
         const form = document.querySelector('.form');
         form.innerHTML = `<div class="create">
         <div id ="field1"><p>商品名稱：</p>
