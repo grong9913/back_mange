@@ -8,7 +8,6 @@ function GetFileName(event){
     }
 }
 const form = document.getElementById('CreateForm');
-
 form.addEventListener('submit', function(event) {
     event.preventDefault();
     console.log(FileName);
@@ -48,3 +47,29 @@ form.addEventListener('submit', function(event) {
         alert('新增商品失敗');
     });
 });
+
+form.addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const formData = new FormData();
+    const files = document.getElementById('field3 ItemImg').files;
+
+    for (let i = 0; i < files.length; i++) {
+        formData.append('images', files[i]);
+    }
+
+    try {
+        const response = await fetch('http://localhost:5193/api/Paradise/uploadimg', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('伺服器回應錯誤');
+        }
+
+        console.log('圖片上傳成功');
+    } catch (error) {
+        console.error('圖片上傳失敗:', error);
+    }
+});       
