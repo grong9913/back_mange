@@ -69,7 +69,6 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
             
             // 如果有符合搜尋條件的資料，則顯示在表格中
             if (data.Message && data.Message.length > 0) {
-                console.log(data.Message,"65656565")
                 data.Message.forEach(Search => {
                     if(Search.Reply==null){
 
@@ -84,7 +83,6 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
                                 <a href=""><input type="button" value="回覆" class="button_reply" data-Id="${Search.Id}"></a>
                             </td>             
                         `;
-                        console.log(Search.CreateTime,"Search.CreateTime");
                         table.appendChild(row); // 將表格行添加到表格中
 
                     }
@@ -92,38 +90,17 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
                 setButtonEventHandlers();
             }
             
-                if (data.Message && data.Message.length > 0) {
-                    data.Message.forEach(qa => {
-                            const row = document.createElement('tr'); // 創建新的表格行
-                            row.classList.add('tbody'); // 為表格行添加類別
-                            row.innerHTML = `
-                                <td>${qa.ItemName}</td>
-                                <td>${qa.Account}</td>
-                                <td>${qa.Content}</td>
-                                <td>${qa.CreateTime ? formatDateTime(qa.CreateTime) : ''}</td>
-                                <td>
-                                    <a href=""><input type="button" value="回覆" class="button_reply" data-Id="${qa.Id}"></a>
-                                </td>             
-                            `;
-                            table.appendChild(row); // 將表格行添加到表格中
-                    });
-                    setButtonEventHandlers();
-                }
-                
-                else {
-                    // 如果沒有符合搜尋條件的資料，顯示提示信息
-                    console.log('No matching data found.');
-                }
+            else {
+                // 如果沒有符合搜尋條件的資料，顯示提示信息
+                console.log('No matching data found.');
             }
-        
-         catch (error) {
+        } catch (error) {
             // 處理錯誤
             console.error('Error:', error);
         }
     });
 
     function setButtonEventHandlers() {
-        console.log("12388888")
         const detailButtons = document.querySelectorAll('.button_reply');
         var modal = document.getElementById("myModal");
         var closeBtn = document.getElementsByClassName("close")[0];
@@ -137,7 +114,6 @@ fetch("http://localhost:5193/api/Back/QA/Unreply", {credentials: 'include'})
 
                 //抓取彈跳視窗資料
                 const Id = button.getAttribute("data-Id");
-                console.log(Id);
                 getItem(Id);
 
                 //關閉彈跳視窗
@@ -223,12 +199,6 @@ function getItem(Id){
         return response.json();
     })
     .then(data=>{
-<<<<<<< HEAD
-=======
-        console.log(data);
-        console.log("123");
-        console.log(data.Message.ItemName)
->>>>>>> 319c4a0f024a0a9aff5a569ba4c75b1ac8e61c44
         const form = document.querySelector('.form');
         form.innerHTML = `<div class="create">
         <div id ="field1"><p>商品名稱：</p>
@@ -249,7 +219,7 @@ function getItem(Id){
     <div class="create">
         <div id ="field1"><p>提問時間：</p>
         </div>
-        ${formatDateTime(data.Message.CreateTime)}
+        ${data.Message.CreateTime}
     </div>
     <div class="create">
         <div id ="field1"><p>回覆內容：</p>
