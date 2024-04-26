@@ -128,9 +128,14 @@
                         <textarea name="Instruction" rows="5" cols="40" required id ="field4" name="Instruction"></textarea>
                     </div>
                     <div class="create">
+                        <div id ="field1"><p>商品封面圖：</p>
+                        </div>
+                        <input type="file" id ="main_ItemImg" multiple name="ItemImg" onchange="GetMainFileName(event)">
+                    </div>
+                    <div class="create">
                         <div id ="field1"><p>商品圖片：</p>
                         </div>
-                        <input type="file" id ="field3 ItemImg" multiple name="ItemImg" onchange="GetFileName(event)">
+                        <input type="file" id ="field3_ItemImg" multiple name="ItemImg" onchange="GetFileName(event)">
                     </div>
                 </div>
                 <div class="button">
