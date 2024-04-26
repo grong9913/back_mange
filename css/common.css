@@ -39,10 +39,10 @@ header img{
     padding: 0;
 }
 .list li {
-    padding: 20px 10px 10px 10px;
+    padding: 20px 10px 15px 15px;
     display: flex;
     align-items: center;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: #e5e2a7;
 }
@@ -61,7 +61,7 @@ header img{
     padding-left: 38px;
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 20px;
 }
 .list2 a{
     text-decoration: none;
