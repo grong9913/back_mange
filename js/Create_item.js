@@ -1,8 +1,14 @@
 let FileName = [];
-
-function GetFileName(event){
+function GetMainFileName(event){
     const fileList = event.target.files;
     FileName = [];
+    for(let i = 0 ; i<fileList.length;i++){
+        FileName.push(fileList[i].name);
+    }
+}
+function GetFileName(event){
+    const fileList = event.target.files;
+    //FileName = [];
     for(let i = 0 ; i<fileList.length;i++){
         FileName.push(fileList[i].name);
     }
@@ -54,7 +60,12 @@ form.addEventListener('submit', async function(event) {
     event.preventDefault();
 
     const formData = new FormData();
-    const files = document.getElementById('field3 ItemImg').files;
+    
+    // const files = document.getElementById('main ItemImg').files;
+    // const files = document.getElementById('field3 ItemImg').files;
+    const files1 = document.getElementById('main_ItemImg').files;
+    const files2 = document.getElementById('field3_ItemImg').files;
+    const files = Array.from(files1).concat(Array.from(files2));
 
     for (let i = 0; i < files.length; i++) {
         formData.append('images', files[i]);
