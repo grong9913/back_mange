@@ -138,6 +138,7 @@ header img{
   }
 
   .text {
+    height: 30px;
     padding: 8px;
     margin: 10px;
     font-size: 14px;
