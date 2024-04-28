@@ -26,8 +26,7 @@ header img{
 }
 
 .sidebar{
-    min-height: calc(100vh - 144px);
-    
+    min-height: calc(100vh - 160px);
     width: 12%;
     padding: 15px;
     color: #fff;
