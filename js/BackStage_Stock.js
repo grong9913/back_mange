@@ -128,81 +128,83 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error:', error);
         });
 
-    // 函數：設置按鈕的事件處理器
-    function setButtonEventHandlers() {
-        const detailButtons = document.querySelectorAll('.button_edit');
-        var modal = document.getElementById("myModal");
-        var closeBtn = document.getElementsByClassName("close")[0];
-        detailButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const FormatId = button.getAttribute("data-FormatId");
-                getItem(FormatId);
-                modal.style.display = "block";
-                closeBtn.addEventListener('click', function() {
+    
+});
+
+// 函數：設置按鈕的事件處理器
+function setButtonEventHandlers() {
+    const detailButtons = document.querySelectorAll('.button_edit');
+    var modal = document.getElementById("myModal");
+    var closeBtn = document.getElementsByClassName("close")[0];
+    detailButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const FormatId = button.getAttribute("data-FormatId");
+            getItem(FormatId);
+            modal.style.display = "block";
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = "none";
+            });
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
                     modal.style.display = "none";
+                }
+            });
+            const form = document.getElementById('UpdateForm');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                console.log("123");
+                
+                const formData = new FormData(form);
+                
+                const data = {};
+                formData.forEach((value, key) => {
+                    data[key] = value;
                 });
-                window.addEventListener('click', function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
+                data['ItemPrice'] = parseInt(data['ItemPrice'].replace(/,/g, ''), 10);
+                data['Store'] = parseInt(data['Store']);
+                data['FormatId'] = parseInt(FormatId);
+                console.log(data)
+                
+                fetch(`http://localhost:5193/api/Back/ItemUpdate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                    credentials: 'include',
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('伺服器回應錯誤');
                     }
-                });
-                const form = document.getElementById('UpdateForm');
-
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault();
-
-                    console.log("123");
-                    
-                    const formData = new FormData(form);
-                    
-                    const data = {};
-                    formData.forEach((value, key) => {
-                        data[key] = value;
-                    });
-                    data['ItemPrice'] = parseInt(data['ItemPrice'].replace(/,/g, ''), 10);
-                    data['Store'] = parseInt(data['Store']);
-                    data['FormatId'] = parseInt(FormatId);
-                    console.log(data)
-                    
-                    fetch(`http://localhost:5193/api/Back/ItemUpdate`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data),
-                        credentials: 'include',
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('伺服器回應錯誤');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('修改成功', data);
-                        alert('修改成功');
-                        location.reload();
-                    })
-                    .catch(error => {
-                        console.error('發生錯誤:', error);
-                        alert('新增-商品失敗');
-                    });
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('修改成功', data);
+                    alert('修改成功');
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('發生錯誤:', error);
+                    alert('新增-商品失敗');
                 });
             });
         });
-    }
+    });
+}
 
-    function formatDateTime(dateTimeString) {
-        const dateTime = new Date(dateTimeString);
-        const year = dateTime.getFullYear();
-        const month = ('0' + (dateTime.getMonth() + 1)).slice(-2);
-        const date = ('0' + dateTime.getDate()).slice(-2);
-        const hours = ('0' + dateTime.getHours()).slice(-2);
-        const minutes = ('0' + dateTime.getMinutes()).slice(-2);
-        const seconds = ('0' + dateTime.getSeconds()).slice(-2);
-        return `${year}/${month}/${date} ${hours}:${minutes}:${seconds}`;
-    }
-});
+function formatDateTime(dateTimeString) {
+    const dateTime = new Date(dateTimeString);
+    const year = dateTime.getFullYear();
+    const month = ('0' + (dateTime.getMonth() + 1)).slice(-2);
+    const date = ('0' + dateTime.getDate()).slice(-2);
+    const hours = ('0' + dateTime.getHours()).slice(-2);
+    const minutes = ('0' + dateTime.getMinutes()).slice(-2);
+    const seconds = ('0' + dateTime.getSeconds()).slice(-2);
+    return `${year}/${month}/${date} ${hours}:${minutes}:${seconds}`;
+}
 
 function getItem(FormatId){
     fetch(`http://localhost:5193/api/Back/ItemUpdate/${FormatId}`,{
@@ -286,3 +288,106 @@ inputField.addEventListener('input', function(event) {
     // 將處理後的值設置回輸入框
     this.value = formattedValue;
 });
+
+const searchButton = document.querySelector('.search-container button[type="submit"]');
+const searchInput = document.getElementById('search_text');
+    
+    // 添加點擊事件監聽器
+    searchButton.addEventListener('click', async () => {
+        // 獲取搜尋關鍵字
+        const searchValue = searchInput.value;
+        console.log(searchValue);
+        
+        try {
+            // 使用Fetch API發送GET請求
+            const response = await fetch(`http://localhost:5193/api/Back/ItemSearch?search=${searchValue}`, {
+                credentials: 'include'
+            });
+    
+            // 檢查響應是否成功
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            // 解析JSON響應
+            const data = await response.json();
+            const table = document.querySelector('table');
+            table.innerHTML = ''; // 清空表格内容
+        
+            const headerRow = document.createElement('tr');
+            headerRow.innerHTML = `
+                <th>新增日期</th>
+                <th>商品名稱</th>
+                <th>儲存空間</th>
+                <th>顏色</th>
+                <th>庫存</th>
+                <th>單價</th>
+                <th>操作</th>
+            `;
+            table.appendChild(headerRow);
+        
+            data.Message.forEach((order, index) => {
+                let count = 0;
+                const tr = document.createElement('tr');
+                tr.className = "Item"
+                const CreateTime = document.createElement('td');
+                CreateTime.textContent = formatDateTime(order.CreateTime);
+                const ItemName = document.createElement('td');
+                ItemName.textContent = order.ItemName;
+                tr.appendChild(CreateTime);
+                tr.appendChild(ItemName);
+                table.appendChild(tr);
+                order.Format.forEach(item => {
+                    let count2 = 0;
+                    const Space = document.createElement('td');
+                    Space.textContent = item.Space;
+        
+                    item.info.forEach((itemInfo, index) => {
+                        const tr2 = document.createElement('tr');
+                        tr2.className = 'ItemInfo';
+                        const Color = document.createElement('td');
+                        Color.textContent = itemInfo.Color;
+                        const Store = document.createElement('td');
+                        Store.textContent = itemInfo.Store;
+                        const ItemPrice = document.createElement('td');
+                        ItemPrice.textContent = itemInfo.ItemPrice;
+                        const inputTd = document.createElement('td');
+                        const input = document.createElement('input');
+                        input.type = "button";
+                        input.value = "修改"
+                        input.className = "button_edit"
+                        input.setAttribute('data-FormatId', itemInfo.FormatId);
+                        inputTd.appendChild(input)
+                        if (count == 0) {
+                            tr.appendChild(Space);
+                            tr.appendChild(Color);
+                            tr.appendChild(Store);
+                            tr.appendChild(ItemPrice);
+                            tr.appendChild(inputTd);
+                        } else {
+                            if (count2 == 0) {
+                                tr2.appendChild(Space);
+                            }
+                            tr2.appendChild(Color);
+                            tr2.appendChild(Store);
+                            tr2.appendChild(ItemPrice);
+                            tr2.appendChild(inputTd);
+                            table.appendChild(tr2)
+                        }
+                        count += 1;
+                        count2 = index + 1;
+                    })
+                    Space.rowSpan = count2;
+                })
+                CreateTime.rowSpan = count;
+                ItemName.rowSpan = count;
+            })
+        
+            setButtonEventHandlers();
+            
+          
+        } catch (error) {
+            // 處理錯誤
+            console.error('Error:', error);
+        }
+    });
