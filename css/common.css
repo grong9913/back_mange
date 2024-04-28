@@ -26,6 +26,8 @@ header img{
 }
 
 .sidebar{
+    min-height: calc(100vh - 144px);
+    
     width: 12%;
     padding: 15px;
     color: #fff;
@@ -33,8 +35,8 @@ header img{
 }
 /* #region 左邊清單 */
 .list {
-    position: sticky;
-    top:50px;
+    position: fixed;
+    top:150px;
     left: 20px;
     list-style-type: none;
     padding: 0;
