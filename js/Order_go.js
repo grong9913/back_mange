@@ -84,3 +84,13 @@ function formatDateTime(dateTimeString) {
     const seconds = ('0' + dateTime.getSeconds()).slice(-2);
     return `${year}/${month}/${date} ${hours}:${minutes}:${seconds}`;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuIcon = document.getElementById('menu-icon');
+    const sidebar = document.getElementById('sidebar');
+
+    menuIcon.addEventListener('click', function() {
+        console.log('Menu icon clicked');
+        sidebar.classList.toggle('show-sidebar');
+    });
+});

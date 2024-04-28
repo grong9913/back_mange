@@ -236,3 +236,13 @@ function getItem(Id){
     })
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const menuIcon = document.getElementById('menu-icon');
+    const sidebar = document.getElementById('sidebar');
+
+    menuIcon.addEventListener('click', function() {
+        console.log('Menu icon clicked');
+        sidebar.classList.toggle('show-sidebar');
+    });
+});
+

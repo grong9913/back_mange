@@ -391,3 +391,13 @@ const searchInput = document.getElementById('search_text');
             console.error('Error:', error);
         }
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuIcon = document.getElementById('menu-icon');
+        const sidebar = document.getElementById('sidebar');
+    
+        menuIcon.addEventListener('click', function() {
+            console.log('Menu icon clicked');
+            sidebar.classList.toggle('show-sidebar');
+        });
+    });

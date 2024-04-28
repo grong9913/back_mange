@@ -4,10 +4,14 @@
     padding: 0;
 }
 body{
+    width: 100%;
     background-color: #DDDBD1;
 }
-header{
+header{    
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 15px;
     color: #fff;
     position: sticky;
@@ -21,6 +25,12 @@ header img{
     height: 70px;
 }
 
+#menu-icon{
+    display: none;
+    width: 50px; 
+    height: 50px;
+    margin-right: 30px;
+}
 .content{
     display: flex;
 }
@@ -35,6 +45,9 @@ header img{
     padding: 15px;
     color: #fff;
     background-color: #2D3A3D;
+}
+.sidebar.show-sidebar {
+    display: block; 
 }
 /* #region 左邊清單 */
 .list {
@@ -93,4 +106,42 @@ header img{
 }
 .icon a{
     color: #B19D84;
+}
+
+@media only screen and (max-width: 1100px) {
+    .sidebar {
+        display: none;
+        width: 20%;
+    }
+    #menu-icon {
+        display: block;
+    }
+    .list li{
+        font-size: 20px;
+    }
+    .list2 li {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .sidebar{
+        width: 18%;
+    }
+}
+@media only screen and (max-width: 820px) {
+    .sidebar{
+        width: 20%;
+    }
+    .list li{
+        font-size: 18px;
+    }
+    .list2 li {
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 710px) {
+    .sidebar{
+        width: 24%;
+    }
 }

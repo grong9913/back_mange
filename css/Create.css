@@ -162,7 +162,7 @@
         display: none;
     }
     .content{
-        flex-direction: column;
+        flex-direction: row;
     }
     
     .content_right_title{
