@@ -31,11 +31,15 @@ header img{
     padding: 15px;
     color: #fff;
     background-color: #2D3A3D;
+    width: 12%;
+    padding: 15px;
+    color: #fff;
+    background-color: #2D3A3D;
 }
 /* #region 左邊清單 */
 .list {
-    position: fixed;
-    top:150px;
+    position: sticky;
+    top:50px;
     left: 20px;
     list-style-type: none;
     padding: 0;
