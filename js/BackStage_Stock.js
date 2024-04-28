@@ -245,7 +245,7 @@ function getItem(FormatId){
         <div>
             <div class="numbox">
                 <button class="min" type="button" onclick="opera('val', false);"> - </button>
-                <input class="num" type="number" id="val" value="0" name="Store"/>
+                <input class="num" type="number" id="val" value="${data.Message.Store}" name="Store"/>
                 <button class="plus" type="button" onclick="opera('val', true);"> + </button>
             </div>
         </div> 
@@ -253,7 +253,7 @@ function getItem(FormatId){
     <div class="create">
         <div id ="field1"><p>商品單價：</p>
         </div>
-        <input type="text" placeholder="NT$xxx,xxx" required id ="field2" name="ItemPrice">
+        <input type="text" placeholder="NT$xxx,xxx" required id ="field2" name="ItemPrice" value="${data.Message.ItemPrice}">
     </div>
     <div class="button">
         <input type="reset" value="重設" id="button1"></input>
