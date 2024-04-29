@@ -55,7 +55,7 @@ fetch("http://localhost:5193/api/Back/OrderShowFinish", { credentials: 'include'
                 }
             })
             bodyRow.innerHTML += `
-            <td class="order${item.OrderId}">${item.TotalPrice}</td>
+            <td class="order${item.OrderId}">${numberWithCommas(item.TotalPrice)}</td>
             <td class="order${item.OrderId}">${item.Address}</td>
             <td class="order${item.OrderId}">
                 已完成

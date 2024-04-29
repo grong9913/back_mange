@@ -56,7 +56,7 @@ fetch("http://localhost:5193/api/Back/OrderShowUnsend", { credentials: 'include'
                 }
             })
             bodyRow.innerHTML += `
-            <td class="order${item.OrderId}">${item.TotalPrice}</td>
+            <td class="order${item.OrderId}">${numberWithCommas(item.TotalPrice)}</td>
             <td class="order${item.OrderId}">${item.Address}</td>
             <td class="order${item.OrderId}">
                 <a href=""><input type="button" value="確認訂單" id="button_go" data-OrderId="${item.OrderId}"></a>
