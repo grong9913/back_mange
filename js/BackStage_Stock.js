@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         const Store = document.createElement('td');
                         Store.textContent = itemInfo.Store;
                         const ItemPrice = document.createElement('td');
-                        ItemPrice.textContent = itemInfo.ItemPrice;
+                        ItemPrice.textContent = numberWithCommas(itemInfo.ItemPrice);
                         const inputTd = document.createElement('td');
                         const input = document.createElement('input');
                         input.type = "button";
@@ -401,3 +401,7 @@ const searchInput = document.getElementById('search_text');
             sidebar.classList.toggle('show-sidebar');
         });
     });
+
+    const numberWithCommas = (number) => {
+        return number.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    };

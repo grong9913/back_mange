@@ -43,7 +43,7 @@ fetch("http://localhost:5193/api/Back/OrderShowUnsend", { credentials: 'include'
                     bodyRow.innerHTML +=`
                     <td>${orderItem.ItemName}</td>
                     <td>${orderItem.ItemFormat}</td>
-                    <td>${orderItem.ItemPrice}</td>
+                    <td>${numberWithCommas(orderItem.ItemPrice)}</td>
                     <td>${orderItem.ItemNum}</td>`
                     table.appendChild(bodyRow);
                 }
@@ -51,7 +51,7 @@ fetch("http://localhost:5193/api/Back/OrderShowUnsend", { credentials: 'include'
                     OtherItem.innerHTML = `
                     <td>${orderItem.ItemName}</td>
                     <td>${orderItem.ItemFormat}</td>
-                    <td>${orderItem.ItemPrice}</td>
+                    <td>${numberWithCommas(orderItem.ItemPrice)}</td>
                     <td>${orderItem.ItemNum}</td>`;
                 }
             })
@@ -126,3 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sidebar.classList.toggle('show-sidebar');
     });
 });
+
+const numberWithCommas = (number) => {
+    return number.toLocaleString(undefined, { maximumFractionDigits: 0 });
+};
