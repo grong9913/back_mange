@@ -33,6 +33,7 @@ header img{
 }
 .content{
     display: flex;
+    justify-content: center;
 }
 
 .sidebar{
@@ -51,6 +52,8 @@ header img{
 }
 /* #region 左邊清單 */
 .list {
+    display: flex;
+    flex-direction: column;
     position: sticky;
     top:50px;
     left: 20px;
