@@ -38,6 +38,18 @@ form.addEventListener('submit', function(event) {
 
 }); 
 
+function togglePasswordVisibility() {
+    var passwordInput = document.getElementsByName("password")[0];
+    var toggleIcon = document.getElementById("toggleIcon");
+    
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleIcon.src = "./images/view.png";
+    } else {
+        passwordInput.type = "password";
+        toggleIcon.src = "./images/hide.png";
+    }
+}
 // const form = document.querySelector('.form');
 //     form.addEventListener('submit', function(event) {
 //         event.preventDefault();

@@ -85,6 +85,28 @@ header img{
     font-weight: bolder;
     color: #71472F;
 }
+.password {
+  display: inline-block;
+  font-weight: bolder;
+  color: #5f7e99;
+  position: relative; /* 保留相对定位 */
+  width: 40%;
+  margin: 10px 0;
+  padding: 15px 30px;
+  margin:5px 15px;
+}
+
+.toggle-password {
+  color: #4c5f79;
+  position: absolute;
+  padding-right: 15px;
+  padding-bottom: 75px;
+  width: 25px;
+  top: 100px;
+  right: 5px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
 
 #button{
     width: 80px;
