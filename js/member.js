@@ -10,18 +10,19 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
         
         console.log(data.Message);
 
-
+        const row = document.createElement('tr'); // 創建新的表格行
+                row.classList.add('tbody'); // 為表格行添加類別
 
         // 如果資料庫有未回覆的 QA 資料
         if (data.Message && data.Message.length > 0) {
             data.Message.forEach(member => {
                 if(member.MemberKind==null){
                     member.MemberKind="一般會員";
+                }    
+                
+                if(member.MemberTime=="null"){
                     member.MemberTime="永久";
-                }
-                const row = document.createElement('tr'); // 創建新的表格行
-                row.classList.add('tbody'); // 為表格行添加類別
-                row.innerHTML = `
+                    row.innerHTML = `
                     <td>${member.Account1}</td>
                     <td>${member.Name}</td>
                     <td>${member.Cellphone}</td>
@@ -30,7 +31,22 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
                     <td>${member.MemberTime}</td>
                   
                 `;
+                }
+                else{
+                    
+                row.innerHTML = `
+                    <td>${member.Account1}</td>
+                    <td>${member.Name}</td>
+                    <td>${member.Cellphone}</td>
+                    <td>${member.Email}</td>
+                    <td>${member.MemberKind}</td>
+                    <td>${formatDateTime(member.MemberTime)}</td>
+                  
+                `;
+                }
+                console.log(member.MemberTime)
                 table.appendChild(row); // 將表格行添加到表格中
+                
             });
         }
     })
@@ -97,4 +113,22 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
     //     }
     // });
     
-      
+    function formatDateTime(dateTimeString) {
+        const dateTime = new Date(dateTimeString);
+        const year = dateTime.getFullYear()+1;
+        const month = ('0' + (dateTime.getMonth() + 1)).slice(-2);
+        const date = ('0' + dateTime.getDate()).slice(-2);
+        
+        const formattedDateTime = `${year}-${month}-${date} `;
+        return formattedDateTime;
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuIcon = document.getElementById('menu-icon');
+        const sidebar = document.getElementById('sidebar');
+    
+        menuIcon.addEventListener('click', function() {
+            console.log('Menu icon clicked');
+            sidebar.classList.toggle('show-sidebar');
+        });
+    });     
