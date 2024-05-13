@@ -23,13 +23,12 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
                     <td>${member.Name}</td>
                     <td>${member.Cellphone}</td>
                     <td>${member.Email}</td>
-                    <td>${member.MemberKind}</td>
-                    <td>${member.MemberTime}</td>
+                    <td>一般會員</td>
+                    <td>永久</td>
                   
                 `;
                 }
-                else{
-                    
+                else{                    
                 row.innerHTML = `
                     <td>${member.Account1}</td>
                     <td>${member.Name}</td>
@@ -40,7 +39,7 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
                   
                 `;
                 }
-                console.log(member.MemberTime)
+                
                 table.appendChild(row); // 將表格行添加到表格中
                 
             });
