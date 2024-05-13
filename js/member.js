@@ -19,8 +19,9 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
                 if(member.MemberKind==null){
                     member.MemberKind="一般會員";
                 }    
+                console.log(member.MemberTime);
                 
-                if(member.MemberTime=="null"){
+                if(member.MemberTime==null){
                     member.MemberTime="永久";
                     row.innerHTML = `
                     <td>${member.Account1}</td>
@@ -28,12 +29,11 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
                     <td>${member.Cellphone}</td>
                     <td>${member.Email}</td>
                     <td>${member.MemberKind}</td>
-                    <td>${member.MemberTime}</td>
+                    <td>永久</td>
                   
                 `;
                 }
-                else{
-                    
+                else{                    
                 row.innerHTML = `
                     <td>${member.Account1}</td>
                     <td>${member.Name}</td>
