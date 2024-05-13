@@ -10,17 +10,13 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
         
         console.log(data.Message);
 
-        const row = document.createElement('tr'); // 創建新的表格行
-                row.classList.add('tbody'); // 為表格行添加類別
-
         // 如果資料庫有未回覆的 QA 資料
         if (data.Message && data.Message.length > 0) {
             data.Message.forEach(member => {
-                if(member.MemberKind==null){
+                const row = document.createElement('tr'); // 創建新的表格行
+                row.classList.add('tbody'); // 為表格行添加類別
+                if(member.MemberKind==null || member.MemberTime=="null"){
                     member.MemberKind="一般會員";
-                }    
-                
-                if(member.MemberTime=="null"){
                     member.MemberTime="永久";
                     row.innerHTML = `
                     <td>${member.Account1}</td>
