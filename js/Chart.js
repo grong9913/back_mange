@@ -178,8 +178,8 @@ selectedBrand2Element.addEventListener('change', function(event) {
     chart4set(selectedBrand1, selectedBrand2);
 });
 
-function chart4set(selectedBrand1, selectedBrand2) {
-    fetch(`http://localhost:5193/api/Back/CompareTwoBrand?brand1=${selectedBrand1}&brand2=${selectedBrand2}`, {
+function createComparisonChart(brand1, brand2) {
+    fetch(`http://localhost:5193/api/Back/CompareTwoBrand?brand1=${brand1}&brand2=${brand2}`, {
         method: 'GET',
         credentials: 'include',
     })
@@ -190,65 +190,41 @@ function chart4set(selectedBrand1, selectedBrand2) {
         return response.json();
     })
     .then(data => {
-        // 更新圖表數據
-        Chart4.data.labels = data.Message.Labels;
-        Chart4.data.datasets[0].Label=data.Message.Datasets[0].Label;
-        Chart4.data.datasets[0].data = data.Message.Datasets[0].Data;
-        Chart4.data.datasets[1].Label=data.Message.Datasets[1].Label;
-        Chart4.data.datasets[1].data = data.Message.Datasets[1].Data;
-        Chart4.options.plugins.title.text = '今年度' + selectedBrand1+"、"+ selectedBrand2+ ' 品牌銷售量比較';
-
-        // 重新繪製圖表
-        Chart4.update();
+        Chart4 = new Chart(ctx4, {
+            type: 'line',
+            data: {
+                labels: data.Message.Labels,
+                datasets: [
+                    {
+                        label: data.Message.Datasets[0].Label,
+                        data: data.Message.Datasets[0].Data,
+                        borderWidth: data.Message.Datasets[0].BorderWidth
+                    },
+                    {
+                        label: data.Message.Datasets[1].Label,
+                        data: data.Message.Datasets[1].Data,
+                        borderWidth: data.Message.Datasets[1].BorderWidth
+                    }
+                ]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `今年度${brand1}、${brand2}品牌銷售量比較`,
+                        font: {
+                            size: 14
+                        },
+                        color: 'blue'
+                    }
+                }
+            }
+        });
     })
     .catch(error => {
         console.error(error);
     });
-};
+}
 
-// 在初始加載時創建圖表
-fetch(`http://localhost:5193/api/Back/CompareTwoBrand?brand1=Apple&brand2=Nokia`, {
-    method: 'GET',
-    credentials: 'include',
-})
-.then(response => {
-    if (!response.ok) {
-        throw new Error('Fail');
-    }
-    return response.json();
-})
-.then(data => {
-    Chart4 = new Chart(ctx4, {
-        type: 'line',
-        data: {
-            labels: data.Message.Labels,
-            datasets: [
-                {
-                    label: data.Message.Datasets[0].Label,
-                    data: data.Message.Datasets[0].Data,
-                    borderWidth: data.Message.Datasets[0].BorderWidth
-                },
-                {
-                    label: data.Message.Datasets[1].Label,
-                    data: data.Message.Datasets[1].Data,
-                    borderWidth: data.Message.Datasets[1].BorderWidth
-                }
-            ]
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: '今年度Apple、Nokia品牌銷售量比較',
-                    font: {
-                        size: 14
-                    },
-                    color: 'blue'
-                }
-            }
-        }
-    });
-})
-.catch(error => {
-    console.error(error);
-});
+// 一開始創建的圖表
+createComparisonChart("Apple", "Nokia");
