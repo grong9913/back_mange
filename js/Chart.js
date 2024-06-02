@@ -43,7 +43,53 @@ const ctx = document.getElementById('charttest1');
     .catch(error=>{
         console.error(error);
     }) 
-
+    const ctx5 = document.getElementById('charttest5');
+    fetch(`http://localhost:5193/api/Back/GetAllMonthMenber`,{
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(response=>{
+        if(!response.ok){
+            throw new Error('Fail')
+        }
+        return response.json();
+    })
+    .then(data=>{
+        
+          new Chart(ctx5, {
+            type: 'bar',
+            data: {
+                labels: data.Message.Labels,
+                datasets: [{
+                  label: data.Message.Datasets[0].Label,
+                  data: data.Message.Datasets[0].Data,
+                  borderWidth: data.Message.Datasets[0].BorderWidth
+                }]
+              },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '今年每月新增會員數量', // 圖表標題文字
+                        font: {
+                            size:14 // 字體大小
+                        },
+                        color: 'blue' // 字體顏色
+                    }
+                },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  min: 0,
+                  max:20
+                }
+              }
+            }
+          });
+    })
+    .catch(error=>{
+        console.error(error);
+    })
     const ctx2 = document.getElementById('charttest2');
     fetch(`http://localhost:5193/api/Back/GetAllBrandMonthNum`,{
         method: 'GET',
@@ -161,7 +207,7 @@ fetch(`http://localhost:5193/api/Back/GetBrandYearNum?Brand=Apple`, {
 
 
 // 創建圖表
-const ctx4 = document.getElementById('charttest4');
+const ctx4 = document.getElementById('charttest4').getContext('2d');
 let Chart4 = null;
 const selectedBrand1Element = document.getElementById('Cselect1');
 const selectedBrand2Element = document.getElementById('Cselect2');
