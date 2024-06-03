@@ -115,3 +115,6 @@
     display: flex;
     flex-direction: row;
 }
+#select{
+    height: 20px;
+}
