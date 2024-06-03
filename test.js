@@ -71,3 +71,13 @@ function createComparisonChart(brand1, brand2) {
 
 // 一開始創建的圖表
 createComparisonChart("Apple", "Nokia");
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuIcon = document.getElementById('menu-icon');
+    const sidebar = document.getElementById('sidebar');
+
+    menuIcon.addEventListener('click', function() {
+        console.log('Menu icon clicked');
+        sidebar.classList.toggle('show-sidebar');
+    });
+});
