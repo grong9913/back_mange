@@ -17,15 +17,18 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo", { credentials: 'includ
 
                 let permissions = '';
                 console.log(member.CanUse);
-                if (member.CanUse == "False") {
-                    permissions = `<button class="button_use" data-account="${member.Account1}">解除</button>`;
-                } else {
-                    permissions = `<button class="button_unuse" data-account="${member.Account1}">停權</button>`;
-                }
+
 
                 if(member.MemberKind==null || member.MemberTime=="null"){
                     member.MemberKind="一般會員";
                     member.MemberTime="永久";
+                    if (member.CanUse === false) {
+                        permissions = `<button class="button_use" data-account="${member.Account1}">解除</button>`;
+                        console.log("解除")
+                    } else {
+                        permissions = `<button class="button_unuse" data-account="${member.Account1}">停權</button>`;
+                        console.log("停權")
+                    }
                     row.innerHTML = `
                         <td>${member.Account1}</td>
                         <td>${member.Name}</td>
@@ -35,7 +38,12 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo", { credentials: 'includ
                         <td>永久</td>
                         <td>${permissions}</td>
                     `;
-                } else {                    
+                } else {     
+                    if (member.CanUse === false) {
+                        permissions = `<button class="button_use" data-account="${member.Account1}">解除</button>`;
+                    } else {
+                        permissions = `<button class="button_unuse" data-account="${member.Account1}">停權</button>`;
+                    }               
                     row.innerHTML = `
                         <td>${member.Account1}</td>
                         <td>${member.Name}</td>
