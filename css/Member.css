@@ -147,12 +147,7 @@ td a:hover{
     font-weight: bold;
     color: #c43f3f;
 }
-#question{
-    width: 400px;
-    text-align: left;
-    padding: 10px 10px;
-    padding-left: 15px;
-}
+
 .button_use{
     width: 50px;
     margin-right: 5px;
@@ -172,12 +167,12 @@ td a:hover{
     border: 0.5px solid #594949;;
     border-radius: 5px;
     font-size: 18px;
-    color: #594949;
+    color: #ba3232;
     background-color: #FEFCF2;
 }
 .button_unuse:hover{
     color: #FEFCF2;
-    background-color: #766060;
+    background-color: #ba3232;
 }
 /* #endregion */
 /* #region 彈跳視窗 */

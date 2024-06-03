@@ -15,6 +15,15 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
             data.Message.forEach(member => {
                 const row = document.createElement('tr'); // 創建新的表格行
                 row.classList.add('tbody'); // 為表格行添加類別
+
+                let permissions = '';
+                        if (member.IsSuspended) {
+                            permissions = `<button class="button_use" data-account="${member.Account1}">解除</button>`;
+                        } 
+                        else {
+                            permissions = `<button class="button_unuse" data-account="${member.Account1}">停權</button>`;
+                        }
+
                 if(member.MemberKind==null || member.MemberTime=="null"){
                     member.MemberKind="一般會員";
                     member.MemberTime="永久";
@@ -25,6 +34,7 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
                     <td>${member.Email}</td>
                     <td>一般會員</td>
                     <td>永久</td>
+                    <td>${permissions}</td>
                   
                 `;
                 }
@@ -36,6 +46,7 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
                     <td>${member.Email}</td>
                     <td>${member.MemberKind}</td>
                     <td>${formatDateTime(member.MemberTime)}</td>
+                    <td>${permissions}</td>
                   
                 `;
                 }
@@ -43,87 +54,102 @@ fetch("http://localhost:5193/api/Back/GetAllAccountInfo",{credentials: 'include'
                 table.appendChild(row); // 將表格行添加到表格中
                 
             });
-        }
-    })
-    .catch(error => {
-        console.error('發生錯誤:', error);
-    });
+        // 添加事件監聽器到所有的停權和解除按鈕
+        document.querySelectorAll('.button_use').forEach(button => {
+            button.addEventListener('click', handleUnsuspend);
+        });
 
+        document.querySelectorAll('.button_unuse').forEach(button => {
+            button.addEventListener('click', handleSuspend);
+        });
+    }
+})
+.catch(error => {
+    console.error('發生錯誤:', error);
+});
+    function handleSuspend(event) {
+        const account = event.target.getAttribute('data-account');
+        console.log(`Suspending account: ${account}`);
 
-     
-    // const searchButton = document.querySelector('.search-container button[name="search"]');
-    // const searchInput = document.getElementById('search_text');
-    
-    // // 添加點擊事件監聽器
-    // searchButton.addEventListener('click', async () => {
-    //     // 獲取搜尋關鍵字
-    //     const searchValue = searchInput.value;
-        
-    //     try {
-    //         // 使用Fetch API發送GET請求
-    //         const response = await fetch(`http://localhost:5193/api/Back/SearchQA?Search=${searchValue}`, {
-    //             credentials: 'include'
-    //         });
-    
-    //         // 檢查響應是否成功
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    
-    //         // 解析JSON響應
-    //         const data = await response.json();
-    
-    //         var table = document.getElementById('qa_ok_Table');
-    //         var rows = table.querySelectorAll('.tbody');
+        fetch('http://localhost:5193/api/Back/UnUse', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(account)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('停權請求失敗');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Suspend response:', data);
+            alert(data.message);
+            if (data.Status === 200) {
+                const button = event.target;
+                button.textContent = '解除';
+                button.className = 'button_use';
+                button.removeEventListener('click', handleSuspend);
+                button.addEventListener('click', handleUnsuspend);
+            }
+        })
+        .catch(error => {
+            console.error('停權錯誤:', error);
+        });
+    }
 
-    //         rows.forEach(function(row) {
-    //             row.parentNode.removeChild(row);
-    //         });
-            
-    //         // 如果有符合搜尋條件的資料，則顯示在表格中
-    //         if (data.Message && data.Message.length > 0) {
-    //             data.Message.forEach(qa => {
-    //                 if(qa.Reply!=null){ 
-    //                     const row = document.createElement('tr'); // 創建新的表格行
-    //                     row.classList.add('tbody'); // 為表格行添加類別
-    //                     row.innerHTML = `
-    //                         <td>${qa.ItemName}</td>
-    //                         <td>${qa.Account}</td>
-    //                         <td>${qa.Content}</td>
-    //                         <td>${qa.CreateTime ? formatDateTime(qa.CreateTime) : ''}</td>
-    //                         <td>${qa.Reply}</td>
-    //                         <td>${qa.ReplyTime ? formatDateTime(qa.ReplyTime) : ''}</td>                
-    //                     `;
-    //                     table.appendChild(row); // 將表格行添加到表格中
-    //                 }
-                    
-    //             });
-    //         } else {
-    //             // 如果沒有符合搜尋條件的資料，顯示提示信息
-    //             console.log('No matching data found.');
-    //         }
-    //     } catch (error) {
-    //         // 處理錯誤
-    //         console.error('Error:', error);
-    //     }
-    // });
-    
+    function handleUnsuspend(event) {
+        const account = event.target.getAttribute('data-account');
+        console.log(`Unsuspending account: ${account}`);
+
+        fetch('http://localhost:5193/api/Back/CanUse', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(account)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('解除停權請求失敗');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Unsuspend response:', data);
+            alert(data.message);
+            if (data.Status === 200) {
+                const button = event.target;
+                button.textContent = '停權';
+                button.className = 'button_unuse';
+                button.removeEventListener('click', handleUnsuspend);
+                button.addEventListener('click', handleSuspend);
+            }
+        })
+        .catch(error => {
+            console.error('解除停權錯誤:', error);
+        });
+    }
+
     function formatDateTime(dateTimeString) {
         const dateTime = new Date(dateTimeString);
-        const year = dateTime.getFullYear()+1;
+        const year = dateTime.getFullYear() + 1;
         const month = ('0' + (dateTime.getMonth() + 1)).slice(-2);
         const date = ('0' + dateTime.getDate()).slice(-2);
         
-        const formattedDateTime = `${year}-${month}-${date} `;
-        return formattedDateTime;
+        return `${year}-${month}-${date} `;
     }
-    
+
     document.addEventListener('DOMContentLoaded', function() {
         const menuIcon = document.getElementById('menu-icon');
         const sidebar = document.getElementById('sidebar');
-    
+
         menuIcon.addEventListener('click', function() {
             console.log('Menu icon clicked');
             sidebar.classList.toggle('show-sidebar');
         });
-    });     
+    });
