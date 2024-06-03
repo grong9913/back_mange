@@ -70,7 +70,7 @@ const ctx = document.getElementById('charttest1');
                 plugins: {
                     title: {
                         display: true,
-                        text: '今年每月新增會員數量', // 圖表標題文字
+                        text: '今年每月會員新增數量', // 圖表標題文字
                         font: {
                             size:14 // 字體大小
                         },

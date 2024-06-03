@@ -3,17 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./css/Order_go_finish.css">
+    <link rel="stylesheet" type="text/css" href="./css/Chart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <title>訂單管理</title>
+    <title>每月銷售額</title>
 </head>
 <body id="top">
     <header>
         <a href="./login.html"><img src="./images/logo.png"></a>
-        <div class="header_right">
-            <a href="./login.html"><p>登出</p></a>
-            <img src="./images/menu_icon.png" id="menu-icon">
-        </div>
     </header>
     <div class="content">
         <div class="sidebar" id="sidebar">
@@ -50,75 +46,29 @@
         </div>
         <div class="content_right">
             <div class="content_right_title">
-                <div class="content_right_title_img">
-                    <img src="./images/checkout.png" width="30px" height="30px" style="margin-right: 10px;"><b>訂單管理</b>
-                </div>
-                <!-- <div class="search-container">
-                    <input type="text" placeholder="請輸入關鍵字" id="search_text">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div> -->
+                <img src="./images/chart.png" width="40px" height="40px"><b>銷售業績圖</b>
             </div>
-            
             <div class="content_right_table">
                 <div class="content_right_btn">
-                    <div class="order_div">
-                        <a href="./Order_not.html" class="order_btn_2">未出貨</a>
-                        <a href="./Order_go.html" class="order_btn_2">已出貨</a>
-                        <p class="order_btn_1">已完成</p>
-                        
+                    <div class="chart_div">
+                        <a href="./Chart_2_3.html" class="chart_btn_2">每月銷售額</a>
+                        <a href="./Chart_2_3.html" class="chart_btn_2">品牌銷售量</a>
+                        <a href="./Chart_4.html" class="chart_btn_2">品牌銷售比較</a>
+                        <p class="chart_btn_1">會員新增數量</a>
                     </div>
                     <div class="line">
                     </div>
                 </div>
-                <table>
-                    <tr>
-                        <th>編號</th>
-                      <th>新增日期</th>
-                      <th>會員帳號</th>
-                      <th>商品名稱</th>
-                      <th>商品規格</th>
-                      <th>單價</th>
-                      <th>數量</th>
-                      <th>總價</th>
-                      <th>地址</th>
-                      <th>狀態</th>
-                    </tr>
-                    <tr>
-                        <td rowspan="2">1</td>
-                      <td rowspan="2">2024/03/19</td>
-                      <td rowspan="2">ABC12345</td>
-                      <td>iPhone 15</td>
-                      <td>1TB-灰色</td>
-                      <td>40,000</td>
-                      <td>1</td>
-                      <td rowspan="2">110,000</td>
-                      <td rowspan="2">台中市北區三民路三段129號</td>
-                      <td rowspan="2" id="btn_ok">已完成</td>
-                    </tr>
-                    <tr>
-                        <td>iPhone 15</td>
-                        <td>256GB-白色</td>
-                        <td>35,000</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2024/03/19</td>
-                        <td>ABC12345</td>
-                        <td>iPhone 15</td>
-                        <td>1TB-灰色</td>
-                        <td>40,000</td>
-                        <td>1</td>
-                        <td>40,000</td>
-                        <td>台中市北區三民路三段129號</td>
-                        <td rowspan="2" id="btn_ok">已完成</td>
-                      </tr>  
-                </table>
+                <div class="chart5" style="height: 50%; width: 50%;">
+                    <canvas id="charttest5" ></canvas>
+                </div>
+                
             </div>
         </div>
     <div class="icon">
         <a href="#top"><img src="./images/top.png" style="width: 45px; height: 45px;"></a>
     </div>
-    <script src="./js/Order_finish.js"></script>
+    <script src="./js/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
