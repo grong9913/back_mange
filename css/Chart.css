@@ -111,3 +111,7 @@
 .chart1{
     width: 70%;
 }
+.chart_2_3{
+    display: flex;
+    flex-direction: row;
+}
