@@ -27,9 +27,9 @@ const ctx = document.getElementById('charttest1');
                         display: true,
                         text: '今年每月銷售額折線圖', // 圖表標題文字
                         font: {
-                            size:14 // 字體大小
+                            size:18 // 字體大小
                         },
-                        color: 'blue' // 字體顏色
+                        color: 'brown' // 字體顏色
                     }
                 },
               scales: {
@@ -72,9 +72,9 @@ const ctx = document.getElementById('charttest1');
                         display: true,
                         text: '今年每月會員新增數量', // 圖表標題文字
                         font: {
-                            size:14 // 字體大小
+                            size:18 // 字體大小
                         },
-                        color: 'blue' // 字體顏色
+                        color: 'brown' // 字體顏色
                     }
                 },
               scales: {
@@ -119,9 +119,9 @@ const ctx = document.getElementById('charttest1');
                         display: true,
                         text: '當月各品牌規格銷售量', // 圖表標題文字
                         font: {
-                            size:14 // 字體大小
+                            size:18 // 字體大小
                         },
-                        color: 'blue' // 字體顏色
+                        color: 'brown' // 字體顏色
                     }
                 }
             }
@@ -193,9 +193,9 @@ fetch(`http://localhost:5193/api/Back/GetBrandYearNum?Brand=Apple`, {
                     display: true,
                     text: '今年 Apple 各商品規格銷售量',
                     font: {
-                        size: 14
+                        size: 18
                     },
-                    color: 'blue'
+                    color: 'brown'
                 }
             }
         }
@@ -259,9 +259,9 @@ function createComparisonChart(brand1, brand2) {
                         display: true,
                         text: `今年度${brand1}、${brand2}品牌銷售量比較`,
                         font: {
-                            size: 14
+                            size: 18
                         },
-                        color: 'blue'
+                        color: 'brown'
                     }
                 }
             }

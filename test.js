@@ -56,9 +56,9 @@ function createComparisonChart(brand1, brand2) {
                         display: true,
                         text: `今年度${brand1}、${brand2}品牌銷售量比較`,
                         font: {
-                            size: 14
+                            size: 18
                         },
-                        color: 'blue'
+                        color: 'brown'
                     }
                 }
             }

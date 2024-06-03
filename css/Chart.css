@@ -115,6 +115,6 @@
     display: flex;
     flex-direction: row;
 }
-#select{
+#select,#Cselect1,#Cselect2{
     height: 20px;
 }
