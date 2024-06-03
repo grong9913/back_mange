@@ -88,8 +88,9 @@ header img{
 .password {
   display: inline-block;
   font-weight: bolder;
-  color: #5f7e99;
-  position: relative; /* 保留相对定位 */
+  color: #71472F;
+  font-size: 20px;
+  position: relative; 
   width: 40%;
   margin: 10px 0;
   padding: 15px 30px;
